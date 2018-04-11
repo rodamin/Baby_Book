@@ -8,11 +8,9 @@ import android.support.v7.app.AppCompatActivity;
  * Created by ghdth on 2018-04-11.
  */
 
-public class SplashActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
     }
-   
 }
