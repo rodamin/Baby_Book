@@ -1,71 +1,70 @@
 # CREATE TABLE SQL
 
-CREATE TABLE User(
-    name VARCHAR(32) NOT NULL,
-    id VARCHAR(32) NOT NULL,
-    password VARCHAR(32) NOT NULL,
-    code CHAR(64) NOT NULL,
-    gender INT(1) NOT NULL,
-    PRIMARY KEY(id,code)
-);
+CREATE TABLE User(<br>
+    name VARCHAR(32) NOT NULL,<br>
+    id VARCHAR(32) NOT NULL,<br>
+    password VARCHAR(32) NOT NULL,<br>
+    code CHAR(64) NOT NULL,<br>
+    gender INT(1) NOT NULL,<br>
+    PRIMARY KEY(id,code)<br>
+);<br>
+<br>
+CREATE TABLE Baby(<br>
+    code CHAR(64) NOT NULL,<br>
+    baby_name VARCHAR(32) NOT NULL,<br>
+    gender INT(1) NOT NULL,<br>
+    PRIMARY KEY(code,baby_name)<br>
+);<br>
+CREATE TABLE Parent(<br>
+    mother_id VARCHAR(32) DEFAULT NULL,<br>
+    father_id VARCHAR(32) DEFAULT NULL,<br>
+    code CHAR(64) NOT NULL<br>
+    PRIMARY KEY(code)<br>
+);<br>
+CREATE TABLE Baby_Diary(<br>
+    code CHAR(64) NOT NULL,<br>
+    baby_name VARCHAR(32) NOT NULL,<br>
+    date_time DATETIME NOT NULL,<br>
+    subject VARCHAR(64) NOT NULL,<br>
+    diary TEXT DEFAULT NULL,<br>
+    PRIMARY KEY(code,baby_name,date_time)<br>
+);<br>
+CREATE TABLE Growth_Data(<br>
+    code CHAR(64) NOT NULL,<br>
+    baby_name VARCHAR(32) NOT NULL,<br>
+    weight INT(2),<br>
+    height INT(3),<br>
+    date DATE NOT NULL,<br>
+    PRIMARY KEY(code,baby_name,date)<br>
+);<br>
+<br>
+CREATE TABLE BABYBOOK_STORY(<br>
+    code CHAR(64) NOT NULL,<br>
+    baby_name VARCHAR(32) NOT NULL,<br>
+    story TEXT DEFAULT NULL,<br>
+    index INT(1) NOT NULL,<br>
+    PRIMARY KEY(code,baby_name,index)<br>
+);<br>
 
-CREATE TABLE Baby(
-    code CHAR(64) NOT NULL,
-    baby_name VARCHAR(32) NOT NULL,
-    gender INT(1) NOT NULL,
-    PRIMARY KEY(code,baby_name)
-);
-CREATE TABLE Parent(
-    mother_id VARCHAR(32) DEFAULT NULL,
-    father_id VARCHAR(32) DEFAULT NULL,
-    code CHAR(64) NOT NULL
-    PRIMARY KEY(code)
-);
-CREATE TABLE Baby_Diary(
-    code CHAR(64) NOT NULL,
-    baby_name VARCHAR(32) NOT NULL,
-    date_time DATETIME NOT NULL,
-    subject VARCHAR(64) NOT NULL,
-    diary TEXT DEFAULT NULL,
-    PRIMARY KEY(code,baby_name,date_time)
-
-);
-CREATE TABLE Growth_Data(
-    code CHAR(64) NOT NULL,
-    baby_name VARCHAR(32) NOT NULL,
-    weight INT(2),
-    height INT(3),
-    date DATE NOT NULL,
-    PRIMARY KEY(code,baby_name,date)
-);
-
-CREATE TABLE BABYBOOK_STORY(
-    code CHAR(64) NOT NULL,
-    baby_name VARCHAR(32) NOT NULL,
-    story TEXT DEFAULT NULL,
-    index INT(1) NOT NULL,
-    PRIMARY KEY(code,baby_name,index)
-);
-
-CREATE TABLE IMAGE(
-    code CHAR(64) NOT NULL,
-    baby_name VARCHAR(32) NOT NULL,
-    date_time DATETIME NOT NULL,
-    index INT(1) NOT NULL,
-    img_path TEXT NOT NULL,
-    PRIMARY KEY(code,baby_name,date_time,index)
-);
-
-CREATE TABLE PLAN(
-    code CHAR(64) NOT NULL,
-    content TEXT DEFAULT NULL,
-    date DATE NOT NULL,
-    PRIMARY KEY(code,date)
-);
-
-CREATE TABLE VIDEO(
-    code CHAR(64) NOT NULL,
-    baby_name VARCHAR(32) NOT NULL,
-    video_path TEXT NOT NULL,
-    PRIMARY KEY(code,baby_name)
-);
+CREATE TABLE IMAGE(<br>
+    code CHAR(64) NOT NULL,<br>
+    baby_name VARCHAR(32) NOT NULL,<br>
+    date_time DATETIME NOT NULL,<br>
+    index INT(1) NOT NULL,<br>
+    img_path TEXT NOT NULL,<br>
+    PRIMARY KEY(code,baby_name,date_time,index)<br>
+);<br>
+<br>
+CREATE TABLE PLAN(<br>
+    code CHAR(64) NOT NULL,<br>
+    content TEXT DEFAULT NULL,<br>
+    date DATE NOT NULL,<br>
+    PRIMARY KEY(code,date)<br>
+);<br>
+<br>
+CREATE TABLE VIDEO(<br>
+    code CHAR(64) NOT NULL,<br>
+    baby_name VARCHAR(32) NOT NULL,<br>
+    video_path TEXT NOT NULL,<br>
+    PRIMARY KEY(code,baby_name)<br>
+);<br>
