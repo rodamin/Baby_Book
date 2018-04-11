@@ -1,7 +1,7 @@
 # CREATE TABLE SQL
 
 CREATE TABLE User(<br>
-<tb>    name VARCHAR(32) NOT NULL,<br>
+    name VARCHAR(32) NOT NULL,<br>
     id VARCHAR(32) NOT NULL,<br>
     password VARCHAR(32) NOT NULL,<br>
     code CHAR(64) NOT NULL,<br>
