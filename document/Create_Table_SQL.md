@@ -4,9 +4,8 @@ CREATE TABLE User(<br>
     name VARCHAR(32) NOT NULL,<br>
     id VARCHAR(32) NOT NULL,<br>
     password VARCHAR(32) NOT NULL,<br>
-    code CHAR(64) NOT NULL,<br>
     gender INT(1) NOT NULL,<br>
-    PRIMARY KEY(id,code)<br>
+    PRIMARY KEY(id)<br>
 );<br>
 <br>
 CREATE TABLE Baby(<br>
@@ -38,7 +37,7 @@ CREATE TABLE Growth_Data(<br>
     PRIMARY KEY(code,baby_name,date)<br>
 );<br>
 <br>
-CREATE TABLE BABYBOOK_STORY(<br>
+CREATE TABLE BabyBook_Story(<br>
     code CHAR(64) NOT NULL,<br>
     baby_name VARCHAR(32) NOT NULL,<br>
     story TEXT DEFAULT NULL,<br>
@@ -46,7 +45,7 @@ CREATE TABLE BABYBOOK_STORY(<br>
     PRIMARY KEY(code,baby_name,index)<br>
 );<br>
 
-CREATE TABLE IMAGE(<br>
+CREATE TABLE Image(<br>
     code CHAR(64) NOT NULL,<br>
     baby_name VARCHAR(32) NOT NULL,<br>
     date_time DATETIME NOT NULL,<br>
@@ -55,14 +54,14 @@ CREATE TABLE IMAGE(<br>
     PRIMARY KEY(code,baby_name,date_time,index)<br>
 );<br>
 <br>
-CREATE TABLE PLAN(<br>
+CREATE TABLE Plan(<br>
     code CHAR(64) NOT NULL,<br>
     content TEXT DEFAULT NULL,<br>
     date DATE NOT NULL,<br>
     PRIMARY KEY(code,date)<br>
 );<br>
 <br>
-CREATE TABLE VIDEO(<br>
+CREATE TABLE Video(<br>
     code CHAR(64) NOT NULL,<br>
     baby_name VARCHAR(32) NOT NULL,<br>
     video_path TEXT NOT NULL,<br>
