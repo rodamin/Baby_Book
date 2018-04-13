@@ -1,7 +1,9 @@
 package com.example.dsm2016.baby_book;
 
+import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
@@ -23,6 +25,15 @@ public class SplashActivity extends BaseActivity {
                frameAnimation.start();
             }
         });
+        Handler handler=new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent=new Intent(getApplicationContext(),LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        },4000);
 
     }
    
