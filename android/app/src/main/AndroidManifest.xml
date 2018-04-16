@@ -12,29 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
-<<<<<<< HEAD
         <activity android:name=".SplashActivity">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-=======
-        <activity android:name=".SplashActivity"
-            android:theme="@style/Base.V21.Theme.AppCompat.Light">
-             <intent-filter>
-                 <action android:name="android.intent.action.MAIN" />
->>>>>>> fea0e32f27824328bd0b72628a00c5e7ef5358f1
+          <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <category android:name="android.intent.category.LAUNCHER" />
+          </intent-filter>
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".BaseActivity" />
-        <activity android:name=".AlbumActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".AlbumActivity"/>
     </application>
 
 </manifest>
