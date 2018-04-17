@@ -22,6 +22,7 @@
             android:layout_gravity="center"/>
 
         <Button
+            android:id="@+id/btn_calendar"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:background="@drawable/ic_calendar"
@@ -80,17 +81,17 @@
         android:orientation="vertical"
         android:background="@drawable/cover_white">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
 
-            <GridView
-                android:id="@+id/gridview"
-                android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:numColumns="2"></GridView>
+            <!--<GridView-->
+                <!--android:id="@+id/gridview"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="400dp"-->
+                <!--android:numColumns="2"></GridView>-->
 
-        </LinearLayout>
+        <!--</LinearLayout>-->
 
     </ScrollView>
 
