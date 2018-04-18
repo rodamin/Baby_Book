@@ -1,17 +1,12 @@
 package com.example.dsm2016.baby_book;
 
-import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.GridView;
 import android.widget.ImageView;
 
-public class AlbumActivity extends BaseActivity {
+public class DiariesActivity extends BaseActivity {
 
     private ImageView preview;
     private Button btn_calendar;
@@ -19,7 +14,7 @@ public class AlbumActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_album);
+        setContentView(R.layout.activity_diaries);
 
         preview = (ImageView)findViewById(R.id.preview);
         preview.setImageResource(R.drawable.preview_example);
