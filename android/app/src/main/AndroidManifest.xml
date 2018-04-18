@@ -25,6 +25,10 @@
         <activity android:name=".SignupActivity">
 
         </activity>
+
+        <activity android:name=".BabyInfoActivity" />
+        <activity android:name=".CalendarActivity"/>
+
     </application>
 
 </manifest>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/background_gradient">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Baby Information"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:layout_gravity="center"/>
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.5">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <EditText
+            android:id="@+id/edit_name"
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            android:background="@drawable/edit_text"
+            android:hint="아기 이름"
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff"
+            android:textSize="16sp"
+            android:drawableLeft="@drawable/ic_baby"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"/>
+
+        <EditText
+            android:id="@+id/edit_age"
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            android:background="@drawable/edit_text"
+            android:hint="나이(개월)"
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff"
+            android:textSize="16sp"
+            android:drawableLeft="@drawable/ic_age"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"/>
+
+        <EditText
+            android:id="@+id/edit_birth"
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            android:background="@drawable/edit_text"
+            android:hint="생년월일"
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff"
+            android:textSize="16sp"
+            android:drawableLeft="@drawable/ic_cake"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.3"
+        android:gravity="center">
+
+        <ImageButton
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/ic_babyboy"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"/>
+
+        <ImageButton
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/ic_babygirl"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.4"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            android:text="다음"
+            android:textColor="#ffffff"
+            android:background="@color/colorPrimary"/>
+
+    </LinearLayout>
+
+</LinearLayout>
