@@ -1,0 +1,127 @@
+# CREATE TABLE SQL
+
+
+CREATE TABLE `User` (
+  `id` VARCHAR(32) NOT NULL,
+  `password` VARCHAR(32) NOT NULL,
+  `name` VARCHAR(32) NOT NULL,
+  `gender` INT(1) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+
+CREATE TABLE `Parent` (
+  `mother_id` VARCHAR(32) NULL DEFAULT NULL,
+  `father_id` VARCHAR(32) NULL DEFAULT NULL,
+  `code` CHAR(64) NOT NULL,
+  PRIMARY KEY (`code`),
+  INDEX `fk_Parent_User1_idx` (`mother_id` ASC, `father_id` ASC),
+  CONSTRAINT `fk_Parent_User1`
+    FOREIGN KEY (`mother_id` , `father_id`)
+    REFERENCES `User` (`id` , `id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+CREATE TABLE `Baby` (
+  `code` CHAR(64) NOT NULL,
+  `baby_name` VARCHAR(32) NOT NULL,
+  `gender` INT(1) NOT NULL,
+  PRIMARY KEY (`baby_name`, `code`),
+  INDEX `fk_Baby_Parent1_idx` (`code` ASC),
+  CONSTRAINT `fk_Baby_Parent1`
+    FOREIGN KEY (`code`)
+    REFERENCES `Parent` (`code`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+CREATE TABLE `Growth_Data` (
+  `code` CHAR(64) NOT NULL,
+  `baby_name` VARCHAR(32) NOT NULL,
+  `date` DATE NOT NULL,
+  `weight` INT(2) NOT NULL,
+  `height` INT(3) NOT NULL,
+  PRIMARY KEY (`code`, `baby_name`, `date`),
+  CONSTRAINT `fk_Growth_Data_Baby1`
+    FOREIGN KEY (`code` , `baby_name`)
+    REFERENCES `Baby` (`code` , `baby_name`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+
+CREATE TABLE `BabyBook_Story` (
+  `code` CHAR(64) NOT NULL,
+  `baby_name` VARCHAR(32) NOT NULL,
+  `index` INT(1) NOT NULL,
+  `story` TEXT NULL DEFAULT NULL,
+  PRIMARY KEY (`code`, `baby_name`, `index`),
+  CONSTRAINT `fk_BabyBook_Story_Baby1`
+    FOREIGN KEY (`code` , `baby_name`)
+    REFERENCES `Baby` (`code` , `baby_name`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+
+CREATE TABLE `Baby_Diary` (
+  `code` CHAR(64) NOT NULL,
+  `baby_name` VARCHAR(32) NOT NULL,
+  `date_time` DATETIME NOT NULL,
+  `subject` VARCHAR(64) NOT NULL,
+  `diary` TEXT NULL DEFAULT NULL,
+  PRIMARY KEY (`code`, `baby_name`, `date_time`),
+  CONSTRAINT `fk_Baby_Diary_Baby1`
+    FOREIGN KEY (`code` , `baby_name`)
+    REFERENCES `Baby` (`code` , `baby_name`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+
+CREATE TABLE `Image` (
+  `code` CHAR(64) NOT NULL,
+  `baby_name` VARCHAR(32) NOT NULL,
+  `date_time` DATETIME NOT NULL,
+  `index` INT(1) NOT NULL,
+  `img_path` TEXT NOT NULL,
+  PRIMARY KEY (`code`, `baby_name`, `date_time`, `index`),
+  CONSTRAINT `fk_Image_Baby_Diary1`
+    FOREIGN KEY (`code` , `baby_name` , `date_time`)
+    REFERENCES `Baby_Diary` (`code` , `baby_name` , `date_time`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+
+CREATE TABLE `Plan` (
+  `code` CHAR(64) NOT NULL,
+  `date` DATE NOT NULL,
+  `content` TEXT NULL DEFAULT NULL,
+  PRIMARY KEY (`code`, `date`),
+  CONSTRAINT `fk_Plan_Parent1`
+    FOREIGN KEY (`code`)
+    REFERENCES `Parent` (`code`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+
+CREATE TABLE `Video` (
+  `code` CHAR(64) NOT NULL,
+  `baby_name` VARCHAR(32) NOT NULL,
+  `vidio_path` TEXT NOT NULL,
+  PRIMARY KEY (`code`, `baby_name`),
+  CONSTRAINT `fk_Video_Baby1`
+    FOREIGN KEY (`code` , `baby_name`)
+    REFERENCES `Baby` (`code` , `baby_name`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
