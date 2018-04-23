@@ -21,6 +21,11 @@
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".BaseActivity" />
+        <activity android:name=".DiariesActivity"/>
+        <activity android:name=".SignupActivity">
+
+        </activity>
+
         <activity android:name=".DiariesActivity" />
         <activity android:name=".SignupActivity" />
         <activity android:name=".BabyInfoActivity" />
