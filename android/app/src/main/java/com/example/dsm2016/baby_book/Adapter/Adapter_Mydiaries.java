@@ -55,7 +55,7 @@ public class Adapter_Mydiaries extends RecyclerView.Adapter {
 
         public ViewHolder(View itemView) {
             super(itemView);
-            imageView=(ImageView)itemView.findViewById(R.id.diaries_cover);
+           // imageView=(ImageView)itemView.findViewById(R.id.diaries_cover);
 
         }
 
