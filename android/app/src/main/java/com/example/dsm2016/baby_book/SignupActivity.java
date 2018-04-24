@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,15 +14,26 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.example.dsm2016.baby_book.Sever.APIinterface;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+
 /**
  * Created by ghdth on 2018-04-17.
  */
 
 public class SignupActivity extends BaseActivity {
-    EditText ed_id, ed_pwd,ed_pwd_comfrim,ed_email,ed_name,ed_code;
+    private Retrofit retrofit;
+    private APIinterface apIinterface;
+
+    EditText ed_id, ed_pwd,ed_pwd_comfirm,ed_email,ed_name,ed_code;
     Button signup;
+
     private RadioGroup radioGroup;
-    private int sex=0;
+    private int gender=2;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,47 +55,42 @@ public class SignupActivity extends BaseActivity {
         @Override
         public void onCheckedChanged(RadioGroup radioGroup, int i) {
             if(i==R.id.mom_radio){
-                sex=1;
+                gender=0;
             }
             else if(i==R.id.father_radio){
-                sex=2;
+                gender=1;
             }
         }
     };
     public void signup(){
         ed_id=(EditText)findViewById(R.id.signup_id);
         ed_pwd=(EditText)findViewById(R.id.signup_pwd);
-        ed_pwd_comfrim=(EditText)findViewById(R.id.signup_pwd_comfrim);
+        ed_pwd_comfirm=(EditText)findViewById(R.id.signup_pwd_comfrim);
         ed_email=(EditText)findViewById(R.id.signup_email);
         ed_name=(EditText)findViewById(R.id.signup_name);
         ed_code=(EditText)findViewById(R.id.signup_code);
 
         String id=ed_id.getText().toString();
         String pwd=ed_pwd.getText().toString();
-        String pwd_comfrim=ed_pwd_comfrim.getText().toString();
+        String pwd_comfirm=ed_pwd_comfirm.getText().toString();
         String email=ed_email.getText().toString();
         String name=ed_email.getText().toString();
         String code=ed_code.getText().toString();
 
-        if(id.equals("")||pwd.equals("")||pwd_comfrim.equals("")||email.equals("")||name.equals("")||sex==0){
+        if(id.equals("")||pwd.equals("")||pwd_comfirm.equals("")||email.equals("")||name.equals("")||gender==2){
             Toast.makeText(getApplicationContext(),"꼭 입력해 주세요.",Toast.LENGTH_LONG).show();
         }
-        else if(id.equals(" ")||pwd.equals(" ")||pwd_comfrim.equals(" ")||email.equals(" ")||name.equals(" ")||code.equals(" ")){
+        else if(id.equals(" ")||pwd.equals(" ")||pwd_comfirm.equals(" ")||email.equals(" ")||name.equals(" ")||code.equals(" ")){
             Toast.makeText(getApplicationContext(),"공백 ㄴㄴ",Toast.LENGTH_LONG).show();
         }
-        else if(!id.isEmpty()&&!pwd.isEmpty()&&!pwd_comfrim.isEmpty()&&!email.isEmpty()&&!name.isEmpty()&&sex!=0){
-            if(pwd.equals(pwd_comfrim)){
+        else if(!id.isEmpty()&&!pwd.isEmpty()&&!pwd_comfirm.isEmpty()&&!email.isEmpty()&&!name.isEmpty()&&gender!=2){
+            if(pwd.equals(pwd_comfirm)){
                 if(!code.isEmpty()){
-                    //코드가 입렵되었을 때
-                    Intent intent=new Intent(getApplicationContext(),MainActivity.class);
-                    startActivity(intent);
-                    finish();
+                   retrofit_conjoin(id,pwd,name,email,gender,code);
                 }
                 else{
                     //코드가 입력되지 않았을 때
-                    Intent intent=new Intent(getApplicationContext(),MainActivity.class);
-                    startActivity(intent);
-                    finish();
+                     retrofit_join(id,pwd,name,email,gender);
                 }
             }
             else{
@@ -92,5 +99,71 @@ public class SignupActivity extends BaseActivity {
             }
         }
 
+
+
     }
+
+    //첫사용자 회원가입
+    public void retrofit_join(String id, String password,String name, String email, int gender ){
+        retrofit=new Retrofit.Builder().baseUrl(APIinterface.URL).build();
+        apIinterface=retrofit.create(APIinterface.class);
+        Call<Void> call=apIinterface.join(id,password,name,email,gender);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                int status=response.code();
+                if(status==201){
+
+                    Log.d("회원가입","성공");
+                    Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                    Toast.makeText(getApplicationContext(),"회원가입 성공",Toast.LENGTH_LONG).show();
+                }
+                else if(status==404){
+                    Log.d("회원가입","실패");
+                    Toast.makeText(getApplicationContext(),"회원가입 실패",Toast.LENGTH_LONG).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.d("연결","실패");
+            }
+        });
+
+    }
+    //두 번째 사용자
+    public void retrofit_conjoin(String id, String password,String name, String email,int gender, String other_id){
+        retrofit=new Retrofit.Builder().baseUrl(APIinterface.URL).build();
+        apIinterface=retrofit.create(APIinterface.class);
+        Call<Void> call=apIinterface.conjoin(id,password,name,email,gender, other_id);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                int status=response.code();
+                if(status==201){
+                    Log.d("두번째 사용자 회원가입","성공");
+                    Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                    Toast.makeText(getApplicationContext(),"두 번째 사용자 회원가입 성공",Toast.LENGTH_LONG).show();
+                }
+                else if(status==404){
+                    Log.d("회원가입","실패");
+                    Toast.makeText(getApplicationContext(),"회원가입 실패",Toast.LENGTH_LONG).show();
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.d("연결","실패");
+
+            }
+        });
+    }
+
 }

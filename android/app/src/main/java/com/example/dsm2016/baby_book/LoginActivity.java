@@ -18,8 +18,8 @@ import android.widget.Toast;
 
 
 public class LoginActivity extends BaseActivity{
-    EditText id;
-    EditText pwd;
+    EditText id_et;
+    EditText pwd_et;
     TextView find_id,find_pwd,signup;
     CheckBox cb_autolog;
     @Override
@@ -67,16 +67,18 @@ public class LoginActivity extends BaseActivity{
 
     }
     public void login(){
-        id=(EditText)findViewById(R.id.edit_id);
-        pwd=(EditText)findViewById(R.id.edit_pw);
-        if(id.toString().equals("")||pwd.toString().equals("")){
+        id_et=(EditText)findViewById(R.id.edit_id);
+        pwd_et=(EditText)findViewById(R.id.edit_pw);
+        String id=id_et.getText().toString();
+        String pwd=pwd_et.getText().toString();
+        if(id.equals("")||pwd.equals("")){
             Toast.makeText(getApplicationContext(),"꼭 입력해 주세요.",Toast.LENGTH_LONG).show();
         }
-        else if(id.toString().equals(" ")||pwd.toString().equals(" ")){
+        else if(id.equals(" ")||pwd.equals(" ")){
             Toast.makeText(getApplicationContext(),"공백 포함 ㄴㄴ ",Toast.LENGTH_LONG).show();
         }
         else{
-            if (!id.toString().isEmpty() && !pwd.toString().isEmpty()) {
+            if (!id.isEmpty() && !pwd.isEmpty()) {
                 //레트로핏 로그인
                 Intent intent=new Intent(getApplicationContext(),MainActivity.class);
                 startActivity(intent);

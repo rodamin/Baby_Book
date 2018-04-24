@@ -10,9 +10,14 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.example.dsm2016.baby_book.Item.Item_Mydairies;
 import com.example.dsm2016.baby_book.R;
 
 import java.util.ArrayList;
+
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 import static android.support.v7.widget.RecyclerView.*;
 
@@ -20,18 +25,16 @@ import static android.support.v7.widget.RecyclerView.*;
  * Created by ghdth on 2018-04-18.
  */
 
-public class Adapter_Mydiaries extends RecyclerView.Adapter {
+public class Adapter_Mydiaries extends RecyclerView.Adapter<Adapter_Mydiaries.ViewHolder>  {
+    private ItemClickListener mClickListener;
 
+
+    private ArrayList<Item_Mydairies> mItems;
     private Context context;
-    private ArrayList mItems;
 
-    private int lastPosition = -1;
-
-
-    public Adapter_Mydiaries(ArrayList items, Context mContext){
-        mItems = items;
-        context = mContext;
-
+    public Adapter_Mydiaries(ArrayList<Item_Mydairies> items){
+        this.mItems = items;
+        this.context=context;
     }
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -42,29 +45,42 @@ public class Adapter_Mydiaries extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holder.imageView.setImageResource(mItems.get(position).getImage());
+       /* Glide.with(context).load(R.drawable.background_main)
+                .apply(RequestOptions.bitmapTransform(new RoundedCornersTransformation(45,0,
+                        RoundedCornersTransformation.CornerType.BOTTOM))).into(holder.imageView);*/
     }
+
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mItems.size();
     }
-    public class ViewHolder extends RecyclerView.ViewHolder{
+
+
+
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public ImageView imageView;
 
         public ViewHolder(View itemView) {
             super(itemView);
-           // imageView=(ImageView)itemView.findViewById(R.id.diaries_cover);
+            imageView=(ImageView)itemView.findViewById(R.id.image_diaries);
+            itemView.setOnClickListener(this);
 
+        }
+
+        @Override
+        public void onClick(View view) {
+            if(mClickListener!=null){
+                mClickListener.onItemClick(view, getAdapterPosition());
+            }
         }
 
     }
-    private void setAnimation(View viewToAnimate,int postion){
-        if(postion>lastPosition){
-            Animation animation= AnimationUtils.loadAnimation(context,android.R.anim.slide_in_left);
-            viewToAnimate.startAnimation(animation);
-            lastPosition=postion;
-        }
+
+    private interface ItemClickListener {
+        void onItemClick(View view, int adapterPosition);
     }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.dsm2016.baby_book">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -26,8 +27,10 @@
 
         </activity>
 
-        <activity android:name=".DiariesActivity" />
-        <activity android:name=".SignupActivity" />
+        <activity android:name=".DiariesActivity"
+            tools:ignore="DuplicateActivity" />
+        <activity android:name=".SignupActivity"
+            tools:ignore="DuplicateActivity" />
         <activity android:name=".BabyInfoActivity" />
         <activity android:name=".CalendarActivity" />
         <activity android:name=".GraphActivity" />
