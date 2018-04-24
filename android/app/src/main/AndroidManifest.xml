@@ -34,16 +34,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".DiariesActivity"
-            tools:ignore="DuplicateActivity" />
-        <activity android:name=".SignupActivity"
-            tools:ignore="DuplicateActivity" />
-        <activity android:name=".BabyInfoActivity"
-            tools:ignore="DuplicateActivity" />
-        <activity android:name=".CalendarActivity"
-            tools:ignore="DuplicateActivity" />
-        <activity android:name=".GraphActivity"
-            tools:ignore="DuplicateActivity" />
+        
         <activity android:name=".CoupleStoryActivity" />
         <activity android:name=".MarryStoryActivity" />
         <activity android:name=".BabyStoryActivity" />
