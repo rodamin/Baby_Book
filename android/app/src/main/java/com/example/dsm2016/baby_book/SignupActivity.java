@@ -44,7 +44,8 @@ public class SignupActivity extends BaseActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                signup();
+                Log.d("로그인","로그인");
+                signup_btn();
             }
         });
 
@@ -62,7 +63,8 @@ public class SignupActivity extends BaseActivity {
             }
         }
     };
-    public void signup(){
+    public void signup_btn(){
+        Log.d("하하","하하");
         ed_id=(EditText)findViewById(R.id.signup_id);
         ed_pwd=(EditText)findViewById(R.id.signup_pwd);
         ed_pwd_comfirm=(EditText)findViewById(R.id.signup_pwd_comfrim);
@@ -87,10 +89,19 @@ public class SignupActivity extends BaseActivity {
             if(pwd.equals(pwd_comfirm)){
                 if(!code.isEmpty()){
                    retrofit_conjoin(id,pwd,name,email,gender,code);
+
+                    /*Intent intent=new Intent(getApplicationContext(),LoginActivity.class);
+                    startActivity(intent);
+                    finish();*/
+
                 }
                 else{
                     //코드가 입력되지 않았을 때
                      retrofit_join(id,pwd,name,email,gender);
+                     Log.d("코드","x");
+                    /*Intent intent=new Intent(getApplicationContext(),LoginActivity.class);
+                    startActivity(intent);
+                    finish();*/
                 }
             }
             else{
@@ -105,6 +116,7 @@ public class SignupActivity extends BaseActivity {
 
     //첫사용자 회원가입
     public void retrofit_join(String id, String password,String name, String email, int gender ){
+        Log.d("첫","사용자");
         retrofit=new Retrofit.Builder().baseUrl(APIinterface.URL).build();
         apIinterface=retrofit.create(APIinterface.class);
         Call<Void> call=apIinterface.join(id,password,name,email,gender);
@@ -115,7 +127,7 @@ public class SignupActivity extends BaseActivity {
                 if(status==201){
 
                     Log.d("회원가입","성공");
-                    Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                    Intent intent=new Intent(getApplicationContext(),LoginActivity.class);
                     startActivity(intent);
                     finish();
                     Toast.makeText(getApplicationContext(),"회원가입 성공",Toast.LENGTH_LONG).show();
@@ -129,7 +141,7 @@ public class SignupActivity extends BaseActivity {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Log.d("연결","실패");
+                Log.d("연결","실패"+t.getMessage());
             }
         });
 
@@ -145,7 +157,7 @@ public class SignupActivity extends BaseActivity {
                 int status=response.code();
                 if(status==201){
                     Log.d("두번째 사용자 회원가입","성공");
-                    Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                    Intent intent=new Intent(getApplicationContext(),LoginActivity.class);
                     startActivity(intent);
                     finish();
                     Toast.makeText(getApplicationContext(),"두 번째 사용자 회원가입 성공",Toast.LENGTH_LONG).show();
@@ -160,7 +172,7 @@ public class SignupActivity extends BaseActivity {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Log.d("연결","실패");
+                Log.d("연결","실패"+t.getMessage());
 
             }
         });

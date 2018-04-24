@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -16,12 +17,23 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.dsm2016.baby_book.Sever.APIinterface;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+
 
 public class LoginActivity extends BaseActivity{
     EditText id_et;
     EditText pwd_et;
     TextView find_id,find_pwd,signup;
     CheckBox cb_autolog;
+
+    private Retrofit retrofit;
+    private APIinterface apIinterface;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,10 +92,42 @@ public class LoginActivity extends BaseActivity{
         else{
             if (!id.isEmpty() && !pwd.isEmpty()) {
                 //레트로핏 로그인
-                Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+              /*  Intent intent=new Intent(getApplicationContext(),DiariesActivity.class);
                 startActivity(intent);
-                finish();
+                finish();*/
+               retrofit_login(id,pwd);
             }
         }
     }
+    public void retrofit_login(String id, String password){
+        retrofit=new Retrofit.Builder().baseUrl(APIinterface.URL).build();
+        apIinterface=retrofit.create(APIinterface.class);
+        Call<Void> call=apIinterface.login(id,password);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                int status=response.code();
+                if(status==201){
+                    Log.d("로그인","성공");
+                    Intent intent=new Intent(getApplicationContext(),DiariesActivity.class);
+                    startActivity(intent);
+                    finish();
+                    Toast.makeText(getApplicationContext(),"로그인 성공",Toast.LENGTH_LONG).show();
+                }
+                else if(status==404){
+                    Toast.makeText(getApplicationContext(),"로그인 실패",Toast.LENGTH_LONG).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(getApplicationContext(),"연결 실패",Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+    }
+
+
 }

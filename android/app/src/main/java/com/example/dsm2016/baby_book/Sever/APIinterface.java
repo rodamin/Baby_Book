@@ -13,7 +13,7 @@ import retrofit2.http.POST;
  */
 
 public interface APIinterface  {
-    String URL="http://";
+    String URL="http://192.168.1.101:3000/";
     @FormUrlEncoded
     @POST("/join")
     Call<Void> join(@Field("id")String id,

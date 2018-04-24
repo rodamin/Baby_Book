@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -27,14 +28,13 @@ public class DiariesActivity extends BaseActivity  {
     private RecyclerView.Adapter madapter;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<Item_Mydairies> item_mydairies;
-
+    Item_Mydairies item;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diaries);
 
-        preview = (ImageView)findViewById(R.id.preview);
-        preview.setImageResource(R.drawable.preview_example);
+
 
         btn_calendar = (Button)findViewById(R.id.btn_calendar);
 
@@ -54,12 +54,21 @@ public class DiariesActivity extends BaseActivity  {
 
 
         item_mydairies=new ArrayList<>();
-        madapter=new Adapter_Mydiaries(item_mydairies);
+        madapter=new Adapter_Mydiaries(item_mydairies,getApplicationContext());
         recyclerView.setAdapter(madapter);
 
 
         item_mydairies.add(new Item_Mydairies(R.drawable.background_main));
         item_mydairies.add(new Item_Mydairies(R.drawable.test));
+        item_mydairies.add(new Item_Mydairies(R.drawable.test2));
+        item_mydairies.add(new Item_Mydairies(R.drawable.test3));
+
+       Intent intent=getIntent();
+        int image=intent.getIntExtra("image",0);
+        Log.d("dfdfdf",Integer.toString(image));
+        preview=(ImageView)findViewById(R.id.preview);
+        //preview.setImageResource(item_mydairies.get(image).getImage());
+
 
     }
 
