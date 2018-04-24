@@ -70,7 +70,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="16dp"
             android:layout_marginTop="10dp"
-            android:visibility="invisible"/>
+            android:visibility="invisible" />
 
         <ImageButton
             android:id="@+id/btn_graph"
