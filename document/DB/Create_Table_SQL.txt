@@ -6,6 +6,7 @@ CREATE TABLE `User` (
   `password` VARCHAR(32) NOT NULL,
   `name` VARCHAR(32) NOT NULL,
   `gender` INT(1) NOT NULL,
+  `email` VARCHAR(64) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -14,7 +15,7 @@ ENGINE = InnoDB;
 CREATE TABLE `Parent` (
   `mother_id` VARCHAR(32) NULL DEFAULT NULL,
   `father_id` VARCHAR(32) NULL DEFAULT NULL,
-  `code` CHAR(64) NOT NULL,
+  `code` INT(8) NOT NULL auto_increment,
   PRIMARY KEY (`code`),
   INDEX `fk_Parent_User1_idx` (`mother_id` ASC, `father_id` ASC),
   CONSTRAINT `fk_Parent_User1`
@@ -25,7 +26,7 @@ CREATE TABLE `Parent` (
 ENGINE = InnoDB;
 
 CREATE TABLE `Baby` (
-  `code` CHAR(64) NOT NULL,
+  `code` INT(8) NOT NULL,
   `baby_name` VARCHAR(32) NOT NULL,
   `gender` INT(1) NOT NULL,
   PRIMARY KEY (`baby_name`, `code`),
@@ -38,7 +39,7 @@ CREATE TABLE `Baby` (
 ENGINE = InnoDB;
 
 CREATE TABLE `Growth_Data` (
-  `code` CHAR(64) NOT NULL,
+  `code` INT(8) NOT NULL,
   `baby_name` VARCHAR(32) NOT NULL,
   `date` DATE NOT NULL,
   `weight` INT(2) NOT NULL,
@@ -54,7 +55,7 @@ ENGINE = InnoDB;
 
 
 CREATE TABLE `BabyBook_Story` (
-  `code` CHAR(64) NOT NULL,
+  `code` INT(8) NOT NULL,
   `baby_name` VARCHAR(32) NOT NULL,
   `index` INT(1) NOT NULL,
   `story` TEXT NULL DEFAULT NULL,
@@ -69,7 +70,7 @@ ENGINE = InnoDB;
 
 
 CREATE TABLE `Baby_Diary` (
-  `code` CHAR(64) NOT NULL,
+  `code` INT(8) NOT NULL,
   `baby_name` VARCHAR(32) NOT NULL,
   `date_time` DATETIME NOT NULL,
   `subject` VARCHAR(64) NOT NULL,
@@ -85,7 +86,7 @@ ENGINE = InnoDB;
 
 
 CREATE TABLE `Image` (
-  `code` CHAR(64) NOT NULL,
+  `code` INT(8) NOT NULL,
   `baby_name` VARCHAR(32) NOT NULL,
   `date_time` DATETIME NOT NULL,
   `index` INT(1) NOT NULL,
@@ -101,7 +102,7 @@ ENGINE = InnoDB;
 
 
 CREATE TABLE `Plan` (
-  `code` CHAR(64) NOT NULL,
+  `code` INT(8) NOT NULL,
   `date` DATE NOT NULL,
   `content` TEXT NULL DEFAULT NULL,
   PRIMARY KEY (`code`, `date`),
@@ -115,7 +116,7 @@ ENGINE = InnoDB;
 
 
 CREATE TABLE `Video` (
-  `code` CHAR(64) NOT NULL,
+  `code` INT(8) NOT NULL,
   `baby_name` VARCHAR(32) NOT NULL,
   `vidio_path` TEXT NOT NULL,
   PRIMARY KEY (`code`, `baby_name`),
