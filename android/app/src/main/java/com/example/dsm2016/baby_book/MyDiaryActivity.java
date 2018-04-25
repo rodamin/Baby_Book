@@ -21,6 +21,7 @@ import com.example.dsm2016.baby_book.Adapter.Adapter_Mydiaries;
 import com.example.dsm2016.baby_book.Adapter.Adapter_ShowDiaries;
 import com.example.dsm2016.baby_book.Item.Item_Mydairies;
 import com.example.dsm2016.baby_book.Item.Item_ShowDiaries;
+import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import org.w3c.dom.Text;
 
@@ -31,6 +32,7 @@ public class MyDiaryActivity extends BaseActivity {
     private RelativeLayout relative_all;
     private TextView text_story, text_graph, text_video;
     private ImageButton btn_menu, btn_story, btn_graph, btn_video;
+    private FloatingActionButton float_add_diary;
     boolean temp = false;
 
     private RecyclerView mRecyclerView;
@@ -52,6 +54,7 @@ public class MyDiaryActivity extends BaseActivity {
         btn_story = (ImageButton)findViewById(R.id.btn_story);
         btn_graph = (ImageButton)findViewById(R.id.btn_graph);
         btn_video = (ImageButton)findViewById(R.id.btn_video);
+        float_add_diary = (FloatingActionButton)findViewById(R.id.float_add_diary);
 
         // 리사이클러뷰
         mRecyclerView=(RecyclerView)findViewById(R.id.showdiaries_rv);
@@ -78,10 +81,27 @@ public class MyDiaryActivity extends BaseActivity {
 
         // 메뉴 클릭 시 인텐트
 
+        btn_story.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), AddStoryActivity.class);
+                startActivity(intent);
+                Log.d("xxx", "xxx");
+            }
+        });
+
         btn_graph.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), GraphActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        float_add_diary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), WriteDiaryActivity.class);
                 startActivity(intent);
             }
         });
@@ -135,14 +155,6 @@ public class MyDiaryActivity extends BaseActivity {
 
             }
         });
-
-        btn_story.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("click", "click");
-            }
-        });
-
     }
 }
 

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/background_gradient">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="스토리 추가"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:layout_gravity="center"/>
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:paddingBottom="10dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/linear_couple"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginBottom="10dp"
+            android:background="#BAffffff"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:background="@drawable/img_couple"
+                android:scaleType="centerCrop" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/title_couple"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="연애스토리"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="엄마와 아빠는 어떻게 \n만났나요?"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    android:layout_marginTop="14dp"
+                    android:layout_below="@id/title_couple"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_marry"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="#BAffffff"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:background="@drawable/img_marry"
+                android:scaleType="centerCrop" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/title_marry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="결혼스토리"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="결혼 할 때 어떤 약속을\n했나요?"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    android:layout_marginTop="14dp"
+                    android:layout_below="@id/title_marry"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_pregnant"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="#BAffffff"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:background="@drawable/img_pregnant"
+                android:scaleType="centerCrop" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/title_pregnant"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="임신스토리"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="엄마는 나를 임신하고 어떤\n태몽을 꿨을까요?"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    android:layout_marginTop="14dp"
+                    android:layout_below="@id/title_pregnant"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_born"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="#BAffffff"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:background="@drawable/img_born"
+                android:scaleType="centerCrop" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/title_born"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="출산스토리"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="나를 나을 때 부모님은 뭐가\n제일 힘들었나요?"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    android:layout_marginTop="14dp"
+                    android:layout_below="@id/title_born"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

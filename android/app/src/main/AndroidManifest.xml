@@ -10,13 +10,12 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:largeHeap="true">
+        android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
         <activity android:name=".SplashActivity">
-
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -27,26 +26,26 @@
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".BaseActivity" />
-        <activity android:name=".DiariesActivity"/>
+        <activity android:name=".DiariesActivity" />
         <activity android:name=".SignupActivity" />
-        <activity android:name=".BabyInfoActivity"/>
+        <activity android:name=".BabyInfoActivity" />
         <activity android:name=".CalendarActivity" />
-        <activity android:name=".GraphActivity"/>
-
+        <activity android:name=".GraphActivity" />
         <activity android:name=".CoupleStoryActivity" />
         <activity android:name=".MarryStoryActivity" />
         <activity android:name=".BabyStoryActivity" />
         <activity android:name=".PregnantStoryActivity" />
-        <activity android:name=".MyDiaryActivity">
+        <activity android:name=".MyDiaryActivity" />
+        <activity android:name=".WriteDiaryActivity" />
+        <activity android:name=".AddStoryActivity" />
+        <activity android:name=".SelectVideo">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
-        <activity android:name=".WriteDiaryActivity"/>
+        <activity android:name=".SelectMusic"></activity>
     </application>
 
 </manifest>

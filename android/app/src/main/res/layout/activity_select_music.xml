@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/background_gradient">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Video"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:layout_gravity="center"/>
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="동영상에 삽입할 음악을 선택해주세요."
+            android:textColor="#ffffff"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.45"
+        android:orientation="vertical"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:gravity="center">
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <RadioButton
+                android:id="@+id/btn_music1"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/cover_gray"
+                android:text=" Music_1"/>
+
+            <RadioButton
+                android:id="@+id/btn_music2"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/cover_gray"
+                android:text=" Music_2"
+                android:layout_marginTop="20dp"/>
+
+            <RadioButton
+                android:id="@+id/btn_music3"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/cover_gray"
+                android:text=" Music_3"
+                android:layout_marginTop="20dp"/>
+
+            <RadioButton
+                android:id="@+id/btn_music4"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/cover_gray"
+                android:text=" Music_4"
+                android:layout_marginTop="20dp"/>
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="다음"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            android:background="@color/colorPrimary"/>
+
+    </LinearLayout>
+
+</LinearLayout>
