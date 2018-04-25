@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -32,10 +34,10 @@ import static android.support.v7.widget.RecyclerView.*;
 
 public class Adapter_Mydiaries extends RecyclerView.Adapter<Adapter_Mydiaries.ViewHolder>  {
 
-
+    private LayoutInflater layoutInflater;
     private ArrayList<Item_Mydairies> mItems;
     private Context context;
-
+    private Item_Mydairies item;
     public Adapter_Mydiaries(ArrayList<Item_Mydairies> items,Context context){
         this.mItems = items;
         this.context=context;
@@ -54,11 +56,13 @@ public class Adapter_Mydiaries extends RecyclerView.Adapter<Adapter_Mydiaries.Vi
        /* Glide.with(context).load(R.drawable.background_main)
                 .apply(RequestOptions.bitmapTransform(new RoundedCornersTransformation(45,0,
                         RoundedCornersTransformation.CornerType.BOTTOM))).into(holder.imageView);*/
+//        View layout_view=layoutInflater.inflate(R.layout.activity_diaries,null,true);
+
        holder.cardView.setOnClickListener(new View.OnClickListener(){
            @Override
            public void onClick(View view) {
                Toast.makeText(context,"하하"+position,Toast.LENGTH_LONG).show();
-               LayoutInflater inflater;
+               Log.d("하하",String.valueOf(position));
            }
        });
 

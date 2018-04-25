@@ -66,10 +66,23 @@ public class DiariesActivity extends BaseActivity  {
        Intent intent=getIntent();
         int image=intent.getIntExtra("image",0);
         Log.d("dfdfdf",Integer.toString(image));
-        preview=(ImageView)findViewById(R.id.preview);
+        //preview=(ImageView)findViewById(R.id.preview);
         //preview.setImageResource(item_mydairies.get(image).getImage());
 
+        recyclerView.addOnItemTouchListener(new RecyclerViewClickListener(getApplicationContext(),recyclerView,new RecyclerViewClickListener.OnItemClickListener(){
 
+            @Override
+            public void onItemClick(View view, int position) {
+                preview=(ImageView)findViewById(R.id.preview);
+                preview.setImageResource(item_mydairies.get(position).getImage());
+
+            }
+
+            @Override
+            public void onLongItemClick(View view, int position) {
+
+            }
+        }));
     }
 
 
