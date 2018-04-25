@@ -1,64 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/background_main"
-    tools:context="com.example.dsm2016.baby_book.MyDiaryActivity">
+    android:layout_height="match_parent">
 
-    <android.support.v7.widget.Toolbar
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/colorPrimary"
-        app:contentInsetStart="0dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/background_main">
 
-        <LinearLayout
+        <android.support.v7.widget.Toolbar
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:id="@+id/linear_title"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.16"
-                android:gravity="center">
-
-                <TextView
-                    android:id="@+id/text_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="My Diary"
-                    android:textColor="#ffffff"
-                    android:textSize="20sp"
-                    android:layout_marginLeft="60dp"/>
-
-            </LinearLayout>
+            android:layout_height="60dp"
+            android:background="@color/colorPrimary"
+            app:contentInsetStart="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center">
+                android:orientation="horizontal">
 
-                <ImageButton
-                    android:id="@+id/btn_menu"
+                <LinearLayout
+                    android:id="@+id/linear_title"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_menu"
-                    android:background="@android:color/transparent"/>
+                    android:layout_weight="0.16"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/text_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="My Diary"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp"
+                        android:layout_marginLeft="60dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/area_menu"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <ImageButton
+                        android:id="@+id/btn_menu"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_menu"
+                        android:background="@android:color/transparent"/>
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
-    </android.support.v7.widget.Toolbar>
+        </android.support.v7.widget.Toolbar>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/showdiaries_rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_gravity="center">
+
+                <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
+
+                <!--<GridView-->
+                <!--android:id="@+id/gridview"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="400dp"-->
+                <!--android:numColumns="2"></GridView>-->
+
+                <!--</LinearLayout>-->
+
+            </android.support.v7.widget.RecyclerView>
+
+        </RelativeLayout>
+
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/relative_all"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="55dp">
+
+        <TextView
+            android:id="@+id/text_story"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="스토리추가\n: 앨범 속에 엄마 아빠의\n  뒷 이야기를 추가해보세요."
+            android:textColor="#ffffff"
+            android:layout_toLeftOf="@id/btn_story"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="44dp"
+            android:visibility="invisible"/>
 
         <ImageButton
             android:id="@+id/btn_story"
@@ -71,6 +116,18 @@
             android:layout_marginRight="16dp"
             android:layout_marginTop="10dp"
             android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/text_graph"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="성장그래프\n: 우리 아이의 성장과정을\n  그래프로 확인해보세요."
+            android:textColor="#ffffff"
+            android:layout_toLeftOf="@id/btn_graph"
+            android:layout_below="@id/text_story"
+            android:layout_marginTop="24dp"
+            android:layout_marginRight="60dp"
+            android:visibility="invisible"/>
 
         <ImageButton
             android:id="@+id/btn_graph"
@@ -85,6 +142,18 @@
             android:layout_marginTop="16dp"
             android:visibility="invisible"/>
 
+        <TextView
+            android:id="@+id/text_video"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="동영상만들기\n: 일기들을 모아서 앨범을\n  하나의 영상으로 만들어보세요."
+            android:textColor="#ffffff"
+            android:layout_toLeftOf="@id/btn_video"
+            android:layout_below="@id/text_graph"
+            android:layout_marginTop="24dp"
+            android:layout_marginRight="20dp"
+            android:visibility="invisible"/>
+
         <ImageButton
             android:id="@+id/btn_video"
             android:layout_width="60dp"
@@ -97,9 +166,16 @@
             android:layout_marginRight="16dp"
             android:layout_marginTop="16dp"
             android:visibility="invisible"/>
+
     </RelativeLayout>
 
+    <com.getbase.floatingactionbutton.FloatingActionButton
+        android:id="@+id/float_add_diary"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="20dp"
+        android:src="@drawable/ic_add"
+        android:backgroundTint="@color/colorPrimary"/>
 
-
-
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>
