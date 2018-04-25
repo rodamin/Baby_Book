@@ -34,8 +34,6 @@ public class DiariesActivity extends BaseActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diaries);
 
-
-
         btn_calendar = (Button)findViewById(R.id.btn_calendar);
 
         btn_calendar.setOnClickListener(new View.OnClickListener() {
