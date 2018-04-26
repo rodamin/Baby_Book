@@ -19,7 +19,7 @@ public interface APIinterface  {
     Call<Void> join(@Field("id")String id,
                     @Field("password")String password,
                     @Field("name")String name,
-                    @Field("email")String email ,
+                    @Field("email")String email ,   
                     @Field("gender")int gender);
     @FormUrlEncoded
     @POST("/conjoin")

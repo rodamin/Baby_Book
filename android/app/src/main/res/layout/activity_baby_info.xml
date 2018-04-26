@@ -72,7 +72,7 @@
             android:layout_width="280dp"
             android:layout_height="50dp"
             android:background="@drawable/edit_text"
-            android:hint="생년월일"
+            android:hint="생년월일 (ex: 20000821)"
             android:textColor="#ffffff"
             android:textColorHint="#ffffff"
             android:textSize="16sp"

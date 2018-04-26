@@ -98,21 +98,22 @@ public class MyDiaryActivity extends BaseActivity {
             }
         });
 
+        btn_video.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), SelectVideo.class);
+                startActivity(intent);
+            }
+        });
+
         float_add_diary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), WriteDiaryActivity.class);
                 startActivity(intent);
+                ani_menu_off();
             }
         });
-
-
-        // 메뉴 애니메이션 효과
-        final Animation menu_open = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.open_menu_translate);
-        final Animation menu_close = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.close_menu_translate);
-
-        menu_open.setFillAfter(true);
-        menu_close.setFillAfter(true);
 
         btn_menu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,39 +123,54 @@ public class MyDiaryActivity extends BaseActivity {
                 Log.d("xxx", temp+"");
 
                 if(temp == false) {
-                    relative_all.setBackgroundColor(Color.TRANSPARENT);
-                    relative_all.setAnimation(menu_close);
-                    btn_story.setVisibility(View.INVISIBLE);
-                    btn_story.startAnimation(menu_close);
-                    btn_graph.setVisibility(View.INVISIBLE);
-                    btn_graph.startAnimation(menu_close);
-                    btn_video.setVisibility(View.INVISIBLE);
-                    btn_video.startAnimation(menu_close);
-                    text_story.setVisibility(View.INVISIBLE);
-                    text_story.setAnimation(menu_close);
-                    text_graph.setVisibility(View.INVISIBLE);
-                    text_graph.setAnimation(menu_close);
-                    text_video.setVisibility(View.INVISIBLE);
-                    text_video.setAnimation(menu_close);
+                    ani_menu_off();
                 } else {
-                    relative_all.setBackgroundColor(Color.parseColor("#66000000"));
-                    relative_all.setAnimation(menu_open);
-                    btn_story.setVisibility(View.VISIBLE);
-                    btn_story.startAnimation(menu_open);
-                    btn_graph.setVisibility(View.VISIBLE);
-                    btn_graph.startAnimation(menu_open);
-                    btn_video.setVisibility(View.VISIBLE);
-                    btn_video.startAnimation(menu_open);
-                    text_story.setVisibility(View.VISIBLE);
-                    text_story.setAnimation(menu_open);
-                    text_graph.setVisibility(View.VISIBLE);
-                    text_graph.setAnimation(menu_open);
-                    text_video.setVisibility(View.VISIBLE);
-                    text_video.setAnimation(menu_open);
+                    ani_menu_on();
                 }
 
             }
         });
+    }
+
+    public void ani_menu_on() {
+        Animation menu_open = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.open_menu_translate);
+        menu_open.setFillAfter(true);
+
+        relative_all.setBackgroundColor(Color.parseColor("#66000000"));
+        relative_all.setAnimation(menu_open);
+        btn_story.setVisibility(View.VISIBLE);
+        btn_story.startAnimation(menu_open);
+        btn_graph.setVisibility(View.VISIBLE);
+        btn_graph.startAnimation(menu_open);
+        btn_video.setVisibility(View.VISIBLE);
+        btn_video.startAnimation(menu_open);
+        text_story.setVisibility(View.VISIBLE);
+        text_story.setAnimation(menu_open);
+        text_graph.setVisibility(View.VISIBLE);
+        text_graph.setAnimation(menu_open);
+        text_video.setVisibility(View.VISIBLE);
+        text_video.setAnimation(menu_open);
+    }
+
+    public void ani_menu_off() {
+
+        Animation menu_close = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.close_menu_translate);
+        menu_close.setFillAfter(true);
+
+        relative_all.setBackgroundColor(Color.TRANSPARENT);
+        relative_all.setAnimation(menu_close);
+        btn_story.setVisibility(View.INVISIBLE);
+        btn_story.startAnimation(menu_close);
+        btn_graph.setVisibility(View.INVISIBLE);
+        btn_graph.startAnimation(menu_close);
+        btn_video.setVisibility(View.INVISIBLE);
+        btn_video.startAnimation(menu_close);
+        text_story.setVisibility(View.INVISIBLE);
+        text_story.setAnimation(menu_close);
+        text_graph.setVisibility(View.INVISIBLE);
+        text_graph.setAnimation(menu_close);
+        text_video.setVisibility(View.INVISIBLE);
+        text_video.setAnimation(menu_close);
     }
 }
 
