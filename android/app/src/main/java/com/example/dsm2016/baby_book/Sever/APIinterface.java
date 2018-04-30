@@ -1,8 +1,7 @@
 package com.example.dsm2016.baby_book.Sever;
 
-import org.json.JSONObject;
+import com.google.gson.JsonObject;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -13,7 +12,7 @@ import retrofit2.http.POST;
  */
 
 public interface APIinterface  {
-    String URL="http://192.168.1.101:3000/";
+    String URL="http://10.156.145.194:3000/";
     @FormUrlEncoded
     @POST("/join")
     Call<Void> join(@Field("id")String id,
@@ -31,7 +30,7 @@ public interface APIinterface  {
                     @Field("other_id") String other_id);
     @FormUrlEncoded
     @POST("/login")
-    Call<Void> login(@Field("id") String id,
+    Call<JsonObject> login(@Field("id") String id,
                      @Field("password")String password);
 
 }

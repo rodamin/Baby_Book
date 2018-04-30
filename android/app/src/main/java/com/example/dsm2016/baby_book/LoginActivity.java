@@ -18,11 +18,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dsm2016.baby_book.Sever.APIinterface;
+import com.google.gson.JsonObject;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class LoginActivity extends BaseActivity{
@@ -92,25 +97,27 @@ public class LoginActivity extends BaseActivity{
         else{
             if (!id.isEmpty() && !pwd.isEmpty()) {
                 //레트로핏 로그인
-                Intent intent=new Intent(getApplicationContext(),DiariesActivity.class);
+              /*  Intent intent=new Intent(getApplicationContext(),DiariesActivity.class);
                 startActivity(intent);
-                finish();
-               //retrofit_login(id,pwd);
+                finish();*/
+               retrofit_login(id,pwd);
             }
         }
     }
     public void retrofit_login(String id, String password){
-        retrofit=new Retrofit.Builder().baseUrl(APIinterface.URL).build();
+        retrofit=new Retrofit.Builder().baseUrl(APIinterface.URL).addConverterFactory(GsonConverterFactory.create()).build();
         apIinterface=retrofit.create(APIinterface.class);
-        Call<Void> call=apIinterface.login(id,password);
-        call.enqueue(new Callback<Void>() {
+        Call<JsonObject> call=apIinterface.login(id,password);
+        call.enqueue(new Callback<JsonObject>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 int status=response.code();
                 if(status==201){
                     Log.d("로그인","성공");
                     Intent intent=new Intent(getApplicationContext(),DiariesActivity.class);
                     startActivity(intent);
+
+                    Log.d("코드",response.body().get("code").toString());
                     finish();
                     Toast.makeText(getApplicationContext(),"로그인 성공",Toast.LENGTH_LONG).show();
                 }
@@ -121,9 +128,10 @@ public class LoginActivity extends BaseActivity{
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
+            public void onFailure(Call<JsonObject> call, Throwable t) {
                 Toast.makeText(getApplicationContext(),"연결 실패",Toast.LENGTH_LONG).show();
-
+                Log.d("dfdfdfd","dfddfdfdf");
+                Log.d("연결 실패",t.getMessage());
             }
         });
 
