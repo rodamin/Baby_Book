@@ -30,8 +30,8 @@ import java.util.ArrayList;
 public class MyDiaryActivity extends BaseActivity {
 
     private RelativeLayout relative_all;
-    private TextView text_story, text_graph, text_video;
-    private ImageButton btn_menu, btn_story, btn_graph, btn_video;
+    private TextView text_story, text_graph, text_video, text_babyinfo;
+    private ImageButton btn_menu, btn_story, btn_graph, btn_video, btn_babyinfo;
     private FloatingActionButton float_add_diary;
     boolean temp = false;
 
@@ -50,10 +50,12 @@ public class MyDiaryActivity extends BaseActivity {
         text_story = (TextView)findViewById(R.id.text_story);
         text_graph = (TextView)findViewById(R.id.text_graph);
         text_video = (TextView)findViewById(R.id.text_video);
+        text_babyinfo = (TextView)findViewById(R.id.text_babyinfo);
         btn_menu = (ImageButton)findViewById(R.id.btn_menu);
         btn_story = (ImageButton)findViewById(R.id.btn_story);
         btn_graph = (ImageButton)findViewById(R.id.btn_graph);
         btn_video = (ImageButton)findViewById(R.id.btn_video);
+        btn_babyinfo = (ImageButton)findViewById(R.id.btn_baby_info);
         float_add_diary = (FloatingActionButton)findViewById(R.id.float_add_diary);
 
         // 리사이클러뷰
@@ -106,6 +108,14 @@ public class MyDiaryActivity extends BaseActivity {
             }
         });
 
+        btn_babyinfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), Change_BabyInfoActivity.class);
+                startActivity(intent);
+            }
+        });
+
         float_add_diary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -144,12 +154,16 @@ public class MyDiaryActivity extends BaseActivity {
         btn_graph.startAnimation(menu_open);
         btn_video.setVisibility(View.VISIBLE);
         btn_video.startAnimation(menu_open);
+        btn_babyinfo.setVisibility(View.VISIBLE);
+        btn_babyinfo.startAnimation(menu_open);
         text_story.setVisibility(View.VISIBLE);
         text_story.setAnimation(menu_open);
         text_graph.setVisibility(View.VISIBLE);
         text_graph.setAnimation(menu_open);
         text_video.setVisibility(View.VISIBLE);
         text_video.setAnimation(menu_open);
+        text_babyinfo.setVisibility(View.VISIBLE);
+        text_babyinfo.setAnimation(menu_open);
     }
 
     public void ani_menu_off() {
@@ -165,12 +179,16 @@ public class MyDiaryActivity extends BaseActivity {
         btn_graph.startAnimation(menu_close);
         btn_video.setVisibility(View.INVISIBLE);
         btn_video.startAnimation(menu_close);
+        btn_babyinfo.setVisibility(View.INVISIBLE);
+        btn_babyinfo.startAnimation(menu_close);
         text_story.setVisibility(View.INVISIBLE);
         text_story.setAnimation(menu_close);
         text_graph.setVisibility(View.INVISIBLE);
         text_graph.setAnimation(menu_close);
         text_video.setVisibility(View.INVISIBLE);
         text_video.setAnimation(menu_close);
+        text_babyinfo.setVisibility(View.INVISIBLE);
+        text_babyinfo.setAnimation(menu_close);
     }
 }
 

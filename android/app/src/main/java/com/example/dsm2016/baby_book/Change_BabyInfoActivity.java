@@ -6,8 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -23,35 +21,36 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class BabyInfoActivity extends BaseActivity implements View.OnClickListener{
+public class Change_BabyInfoActivity extends BaseActivity implements View.OnClickListener{
 
     private Retrofit retrofit;
     private APIinterface apIinterface;
 
     private ImageButton btn_boy, btn_girl;
-    private EditText edit_name, edit_birth;
-    private Button btn_next;
+    private EditText edit_prev_name, edit_new_name, edit_birth;
+    private Button btn_change;
     private int gender = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_baby_info);
+        setContentView(R.layout.activity_change_baby_info);
 
         btn_boy = (ImageButton)findViewById(R.id.btn_boy);
         btn_girl = (ImageButton)findViewById(R.id.btn_girl);
-        btn_next = (Button)findViewById(R.id.btn_next);
+        btn_change = (Button)findViewById(R.id.btn_change);
 
         btn_boy.setOnClickListener(this);
         btn_girl.setOnClickListener(this);
 
-        btn_next.setOnClickListener(new View.OnClickListener() {
+        btn_change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("아기정보: ", "입력");
-                next_btn();
+                Log.d("onClick btn_change", "success");
+                change_btn();
             }
         });
+
     }
 
     @Override
@@ -71,12 +70,15 @@ public class BabyInfoActivity extends BaseActivity implements View.OnClickListen
         }
     }
 
-    public void next_btn() {
-        Log.d("next_btn()호출: ", "success");
-        edit_name = (EditText)findViewById(R.id.edit_name);
+    public void change_btn() {
+        Log.d("change_btn()", "호출");
+
+        edit_new_name = (EditText)findViewById(R.id.edit_new_name);
+        edit_prev_name = (EditText)findViewById(R.id.edit_prev_name);
         edit_birth = (EditText)findViewById(R.id.edit_birth);
 
-        String baby_name = edit_name.getText().toString();
+        String new_baby_name = edit_new_name.getText().toString();
+        String prev_baby_name = edit_prev_name.getText().toString();
         String date = edit_birth.getText().toString();
         Date birth;
 
@@ -84,38 +86,39 @@ public class BabyInfoActivity extends BaseActivity implements View.OnClickListen
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
             birth = simpleDateFormat.parse(date);
 
-            if(baby_name.equals("") || birth.equals("") || gender == 2) {
+            if(new_baby_name.equals("") || prev_baby_name.equals("") || birth.equals("") || gender == 2) {
                 Toast.makeText(getApplicationContext(),"꼭 입력해 주세요.",Toast.LENGTH_LONG).show();
-            } else if(baby_name.equals(" ") || birth.equals(" ")) {
+            } else if(new_baby_name.equals(" ") || prev_baby_name.equals(" ") || birth.equals(" ")) {
                 Toast.makeText(getApplicationContext(),"공백 금지",Toast.LENGTH_LONG).show();
-            } else if(!baby_name.isEmpty() && gender != 2 ) {
-                retrofit_babyinfo(baby_name, birth, gender);
+            } else if(!new_baby_name.isEmpty() && !prev_baby_name.isEmpty() && gender != 2 ) {
+                retrofit_new_babyinfo(new_baby_name, prev_baby_name, gender, birth);
             }
 
         } catch (java.text.ParseException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+
     }
 
-    public void retrofit_babyinfo(String baby_name, Date birth, int gender) {
-        Log.d("retrofit_babyinfo", "호출");
+    public void retrofit_new_babyinfo(String new_baby_name, String prev_baby_name, int gender, Date birth) {
+        Log.d("retrofit_new_babyinfo", "success");
         retrofit=new Retrofit.Builder().baseUrl(APIinterface.URL).build();
         apIinterface=retrofit.create(APIinterface.class);
-        Call<Void> call=apIinterface.baby(baby_name, gender, birth);
+        Call<Void> call=apIinterface.baby(new_baby_name, prev_baby_name, gender, birth);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 int status=response.code();
                 if(status==201){
-                    Log.d("baby_info 전달","성공");
+                    Log.d("new_baby_info 전달",response.body()+"");
                     Intent intent=new Intent(getApplicationContext(),MyDiaryActivity.class);
                     startActivity(intent);
                     finish();
-                    Toast.makeText(getApplicationContext(),"baby_info 성공",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"new_baby_info 성공",Toast.LENGTH_LONG).show();
                 }
                 else if(status==404){
-                    Toast.makeText(getApplicationContext(),"baby_info 실패",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"new_baby_info 실패",Toast.LENGTH_LONG).show();
                 }
             }
 

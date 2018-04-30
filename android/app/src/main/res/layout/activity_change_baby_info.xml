@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Baby Information"
+            android:text="아기 정보 수정"
             android:textColor="#ffffff"
             android:textSize="20sp"
             android:layout_gravity="center"/>
@@ -38,11 +38,26 @@
         android:gravity="center">
 
         <EditText
-            android:id="@+id/edit_name"
+            android:id="@+id/edit_prev_name"
             android:layout_width="280dp"
             android:layout_height="50dp"
             android:background="@drawable/edit_text"
-            android:hint="아기 이름"
+            android:hint="전 아기 이름"
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff"
+            android:textSize="16sp"
+            android:drawableLeft="@drawable/ic_baby"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"/>
+
+        <EditText
+            android:id="@+id/edit_new_name"
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            android:background="@drawable/edit_text"
+            android:hint="새로운 아기 이름"
             android:textColor="#ffffff"
             android:textColorHint="#ffffff"
             android:textSize="16sp"
@@ -102,10 +117,10 @@
         android:gravity="center">
 
         <Button
-            android:id="@+id/btn_next"
+            android:id="@+id/btn_change"
             android:layout_width="280dp"
             android:layout_height="50dp"
-            android:text="다음"
+            android:text="수정"
             android:textColor="#ffffff"
             android:background="@color/colorPrimary"/>
 

@@ -110,8 +110,6 @@ public class SignupActivity extends BaseActivity {
             }
         }
 
-
-
     }
 
     //첫사용자 회원가입

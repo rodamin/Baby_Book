@@ -5,7 +5,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -17,34 +17,37 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
         <activity android:name=".SplashActivity">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".BaseActivity" />
-        <activity android:name=".DiariesActivity"/>
-        <activity android:name=".SignupActivity" />
+        <activity android:name=".DiariesActivity" />
+        <activity android:name=".SignupActivity"/>
         <activity android:name=".BabyInfoActivity" />
         <activity android:name=".CalendarActivity" />
-        <activity android:name=".GraphActivity" />
-        <activity android:name=".CoupleStoryActivity" />
-        <activity android:name=".MarryStoryActivity" />
-        <activity android:name=".BabyStoryActivity" />
-        <activity android:name=".PregnantStoryActivity" />
-        <activity android:name=".MyDiaryActivity">
+        <activity android:name=".GraphActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".WriteDiaryActivity"/>
+        <activity android:name=".CoupleStoryActivity" />
+        <activity android:name=".MarryStoryActivity" />
+        <activity android:name=".BabyStoryActivity" />
+        <activity android:name=".PregnantStoryActivity" />
+        <activity android:name=".MyDiaryActivity"/>
+        <activity android:name=".WriteDiaryActivity" />
         <activity android:name=".AddStoryActivity" />
-        <activity android:name=".SelectVideo"/>
-        <activity android:name=".SelectMusic"/>
+        <activity android:name=".SelectVideo" />
+        <activity android:name=".SelectMusic" />
+        <activity android:name=".Change_BabyInfoActivity"/>
     </application>
 
 </manifest>
