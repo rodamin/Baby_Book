@@ -122,7 +122,6 @@ public class BabyInfoActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 Log.d("연결","실패"+t.getMessage());
-
             }
         });
     }

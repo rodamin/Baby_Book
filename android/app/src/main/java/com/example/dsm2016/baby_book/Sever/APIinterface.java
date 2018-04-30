@@ -21,7 +21,7 @@ import retrofit2.http.Query;
  */
 
 public interface APIinterface  {
-    String URL="http://192.168.1.101:3000/";
+    String URL="http://10.156.145.193:3000/";
     @FormUrlEncoded
     @POST("/join")
     Call<Void> join(@Field("id")String id,
