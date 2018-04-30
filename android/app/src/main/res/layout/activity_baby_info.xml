@@ -53,26 +53,11 @@
             android:layout_marginBottom="6dp"/>
 
         <EditText
-            android:id="@+id/edit_age"
-            android:layout_width="280dp"
-            android:layout_height="50dp"
-            android:background="@drawable/edit_text"
-            android:hint="나이(개월)"
-            android:textColor="#ffffff"
-            android:textColorHint="#ffffff"
-            android:textSize="16sp"
-            android:drawableLeft="@drawable/ic_age"
-            android:drawablePadding="10dp"
-            android:padding="10dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginBottom="6dp"/>
-
-        <EditText
             android:id="@+id/edit_birth"
             android:layout_width="280dp"
             android:layout_height="50dp"
             android:background="@drawable/edit_text"
-            android:hint="생년월일"
+            android:hint="생년월일 (ex: 20000821)"
             android:textColor="#ffffff"
             android:textColorHint="#ffffff"
             android:textSize="16sp"

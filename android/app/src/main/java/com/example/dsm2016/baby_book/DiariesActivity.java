@@ -63,7 +63,7 @@ public class DiariesActivity extends BaseActivity  {
         btn_calendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), CalendarActivity.class);
+                Intent intent = new Intent(getApplicationContext(), BabyInfoActivity.class);
                 startActivity(intent);
             }
         });

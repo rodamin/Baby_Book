@@ -97,7 +97,11 @@ public class LoginActivity extends BaseActivity{
         else{
             if (!id.isEmpty() && !pwd.isEmpty()) {
                 //레트로핏 로그인
+<<<<<<< HEAD
               /*  Intent intent=new Intent(getApplicationContext(),DiariesActivity.class);
+=======
+               /* Intent intent=new Intent(getApplicationContext(),DiariesActivity.class);
+>>>>>>> 0587234766bb9d3107f28d65642cff0611591786
                 startActivity(intent);
                 finish();*/
                retrofit_login(id,pwd);
