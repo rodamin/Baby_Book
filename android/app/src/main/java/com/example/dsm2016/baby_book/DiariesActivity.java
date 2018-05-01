@@ -41,14 +41,12 @@ public class DiariesActivity extends BaseActivity  {
         setContentView(R.layout.activity_diaries);
 
         DisplayMetrics dm = getApplicationContext().getResources().getDisplayMetrics(); //디바이스 화면크기를 구하기위해
-        int width = dm.widthPixels; //디바이스 화면 너비
-        int height = dm.heightPixels; //디바이스 화면 높이
 
         dialog=new Dialog_Diaries_Title(this);
         WindowManager.LayoutParams wm = dialog.getWindow().getAttributes();  //다이얼로그의 높이 너비 설정하기위해
         wm.copyFrom(dialog.getWindow().getAttributes());  //여기서 설정한값을 그대로 다이얼로그에 넣겠다는의미
-        wm.width = width / 2;  //화면 너비의 절반
-        wm.height = height / 3;  //화면 높이의 절반
+        wm.width = 800 ;  //화면 너비의 절반
+        wm.height = 700;  //화면 높이의 절반
         plus=(FloatingActionButton)findViewById(R.id.float_add_album);
         plus.setIcon(R.drawable.ic_add);
         plus.setOnClickListener(new View.OnClickListener() {
@@ -104,7 +102,8 @@ public class DiariesActivity extends BaseActivity  {
 
             @Override
             public void onLongItemClick(View view, int position) {
-
+                    Toast.makeText(getApplicationContext(),"롱클릭",Toast.LENGTH_LONG).show();
+                    //삭제부분
             }
         }));
 

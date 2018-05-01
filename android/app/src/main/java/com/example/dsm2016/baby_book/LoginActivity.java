@@ -17,12 +17,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.dsm2016.baby_book.DB.DB_Code;
 import com.example.dsm2016.baby_book.Sever.APIinterface;
 import com.google.gson.JsonObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import io.realm.Realm;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -38,6 +40,7 @@ public class LoginActivity extends BaseActivity{
 
     private Retrofit retrofit;
     private APIinterface apIinterface;
+    private Realm mRealm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,18 +100,14 @@ public class LoginActivity extends BaseActivity{
         else{
             if (!id.isEmpty() && !pwd.isEmpty()) {
                 //레트로핏 로그인
-<<<<<<< HEAD
-              /*  Intent intent=new Intent(getApplicationContext(),DiariesActivity.class);
-=======
-               /* Intent intent=new Intent(getApplicationContext(),DiariesActivity.class);
->>>>>>> 0587234766bb9d3107f28d65642cff0611591786
+                Intent intent=new Intent(getApplicationContext(),DiariesActivity.class);
                 startActivity(intent);
-                finish();*/
-               retrofit_login(id,pwd);
+                finish();
+               //retrofit_login(id,pwd);
             }
         }
     }
-    public void retrofit_login(String id, String password){
+    public void retrofit_login(final String id, final String password){
         retrofit=new Retrofit.Builder().baseUrl(APIinterface.URL).addConverterFactory(GsonConverterFactory.create()).build();
         apIinterface=retrofit.create(APIinterface.class);
         Call<JsonObject> call=apIinterface.login(id,password);
@@ -117,11 +116,19 @@ public class LoginActivity extends BaseActivity{
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 int status=response.code();
                 if(status==201){
+
                     Log.d("로그인","성공");
                     Intent intent=new Intent(getApplicationContext(),DiariesActivity.class);
                     startActivity(intent);
+                    //String code=response.body().get("code").toString();
+                    Log.d("코드",response.body().toString());
 
-                    Log.d("코드",response.body().get("code").toString());
+                    Realm.init(LoginActivity.this);
+                    mRealm=Realm.getDefaultInstance();
+                    mRealm.beginTransaction();
+                    DB_Code db=mRealm.createObject(DB_Code.class);
+                    //db.setCode(code)
+                    mRealm.commitTransaction();
                     finish();
                     Toast.makeText(getApplicationContext(),"로그인 성공",Toast.LENGTH_LONG).show();
                 }

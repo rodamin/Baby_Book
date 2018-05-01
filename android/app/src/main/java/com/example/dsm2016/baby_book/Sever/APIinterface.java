@@ -1,9 +1,8 @@
 package com.example.dsm2016.baby_book.Sever;
 
-<<<<<<< HEAD
+import retrofit2.Call;
 import com.google.gson.JsonObject;
 
-=======
 import com.google.gson.JsonArray;
 
 import org.json.JSONArray;
@@ -12,7 +11,6 @@ import org.json.JSONObject;
 import java.util.Date;
 
 import okhttp3.ResponseBody;
->>>>>>> 0587234766bb9d3107f28d65642cff0611591786
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -26,17 +24,14 @@ import retrofit2.http.Query;
  */
 
 public interface APIinterface  {
-<<<<<<< HEAD
-    String URL="http://10.156.145.194:3000/";
-=======
+
     String URL="http://10.156.145.193:3000/";
->>>>>>> 0587234766bb9d3107f28d65642cff0611591786
     @FormUrlEncoded
     @POST("/join")
     Call<Void> join(@Field("id")String id,
                     @Field("password")String password,
                     @Field("name")String name,
-                    @Field("email")String email ,   
+                    @Field("email")String email ,
                     @Field("gender")int gender);
     @FormUrlEncoded
     @POST("/conjoin")

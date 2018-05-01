@@ -44,3 +44,4 @@ dependencies {
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
     compile 'com.getbase:floatingactionbutton:1.10.1'
 }
+apply plugin: 'realm-android'

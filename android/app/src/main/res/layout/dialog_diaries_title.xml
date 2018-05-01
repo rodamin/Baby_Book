@@ -6,13 +6,13 @@
         android:layout_width="300dp"
         android:layout_height="200dp"
         android:orientation="vertical"
-
+        android:background="@drawable/cover_dialog"
         >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal"
-            android:background="@drawable/cover_white">
+            >
             <TextView
                 android:layout_marginLeft="40dp"
                 android:layout_width="0dp"
@@ -35,7 +35,6 @@
             android:layout_height="100dp"
             android:orientation="vertical"
             android:gravity="center"
-            android:background="@drawable/cover_white"
             android:padding="20dp"
             >
             <EditText
