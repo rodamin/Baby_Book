@@ -29,6 +29,7 @@ CREATE TABLE `Baby` (
   `code` INT(8) NOT NULL,
   `baby_name` VARCHAR(32) NOT NULL,
   `gender` INT(1) NOT NULL,
+  `birth` DATE NOT NULL,
   PRIMARY KEY (`baby_name`, `code`),
   INDEX `fk_Baby_Parent1_idx` (`code` ASC),
   CONSTRAINT `fk_Baby_Parent1`
