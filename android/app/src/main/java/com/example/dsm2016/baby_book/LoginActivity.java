@@ -26,6 +26,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import io.realm.Realm;
 import io.realm.RealmResults;
 import retrofit2.Call;
@@ -85,10 +88,8 @@ public class LoginActivity extends BaseActivity{
                 finish();
             }
         });
-
-
-
     }
+
     public void login(){
         id_et=(EditText)findViewById(R.id.edit_id);
         pwd_et=(EditText)findViewById(R.id.edit_pw);
@@ -123,17 +124,13 @@ public class LoginActivity extends BaseActivity{
                     Log.d("로그인","성공");
                     Intent intent=new Intent(getApplicationContext(),DiariesActivity.class);
                     startActivity(intent);
-                    //String code=response.body().get("code").toString();
+
                     Log.d("코드",response.body().toString());
                     JsonArray jsonArray=response.body();
                     String code_res=jsonArray.get(0).getAsJsonObject().get("code").toString();
                     int code=Integer.parseInt(code_res);
-                    Log.d("제발",jsonArray.get(0).getAsJsonObject().get("code").toString());
+                    Log.d("제발",code_res);
 
-
-
-//                    JsonArray jsonArray=response.body().getAsJsonArray("code");
-//                    JsonArray jsonElements=jsonArray.getAsJsonArray();
                     Realm.init(LoginActivity.this);
                     mRealm=Realm.getDefaultInstance();
                     mRealm.beginTransaction();

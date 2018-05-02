@@ -18,6 +18,7 @@ import com.example.dsm2016.baby_book.Sever.APIinterface;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import io.realm.Realm;
 import io.realm.RealmObject;
@@ -32,7 +33,7 @@ public class BabyInfoActivity extends BaseActivity implements View.OnClickListen
     private Retrofit retrofit;
     private APIinterface apIinterface;
     Realm mRealm;
-    DB_Code db_code;
+    DB_Code db_qna;
 
     private ImageButton btn_boy, btn_girl;
     private EditText edit_name, edit_birth;
@@ -86,38 +87,30 @@ public class BabyInfoActivity extends BaseActivity implements View.OnClickListen
         edit_name = (EditText)findViewById(R.id.edit_name);
         edit_birth = (EditText)findViewById(R.id.edit_birth);
 
-//        mRealm = Realm.getDefaultInstance();
-//        RealmResults<Code> results=mRealm.where(Code.class).findAll();
-//        for(int i=0;i<results.size();i++){
-//            Code db_qna=results.get(i);
-//            Log.d("xxx", "protocol : " +db_qna);
-//            list.add(new Item_Main(db_qna.getQuestion(),db_qna.getAnswer()));
-//        }
-
         String baby_name = edit_name.getText().toString();
-        String date = edit_birth.getText().toString();
-        Date birth;
-        int code = db_code.getCode();
+        String birth = edit_birth.getText().toString();
 
-        try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
-            birth = simpleDateFormat.parse(date);
+        mRealm = Realm.getDefaultInstance();
+        RealmResults<DB_Code> results=mRealm.where(DB_Code.class).findAll();
 
-            if(baby_name.equals("") || birth.equals("") || gender == 2) {
-                Toast.makeText(getApplicationContext(),"꼭 입력해 주세요.",Toast.LENGTH_LONG).show();
-            } else if(baby_name.equals(" ") || birth.equals(" ")) {
-                Toast.makeText(getApplicationContext(),"공백 금지",Toast.LENGTH_LONG).show();
-            } else if(!baby_name.isEmpty() && gender != 2 ) {
+        for(int i=0;i<results.size();i++){
+            db_qna=results.get(i);
+            Log.d("db_qna", "protocol : " + db_qna);
+        }
+
+        int code = db_qna.getCode();
+        Log.d("xxx", code+"");
+
+        if(baby_name.equals("") || birth.equals("") || gender == 2) {
+            Toast.makeText(getApplicationContext(),"꼭 입력해 주세요.",Toast.LENGTH_LONG).show();
+        } else if(baby_name.equals(" ") || birth.equals(" ")) {
+            Toast.makeText(getApplicationContext(),"공백 금지",Toast.LENGTH_LONG).show();
+        } else if(!baby_name.isEmpty() && gender != 2 ) {
                 retrofit_babyinfo(baby_name, birth, gender, code);
-            }
-
-        } catch (java.text.ParseException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         }
     }
 
-    public void retrofit_babyinfo(String baby_name, Date birth, int gender, int code) {
+    public void retrofit_babyinfo(String baby_name, String birth, int gender, int code) {
         Log.d("retrofit_babyinfo", "호출");
         retrofit=new Retrofit.Builder().baseUrl(APIinterface.URL).build();
         apIinterface=retrofit.create(APIinterface.class);
