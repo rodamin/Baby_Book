@@ -69,15 +69,19 @@ public class Adapter_Mydiaries extends RecyclerView.Adapter<Adapter_Mydiaries.Vi
     }
 
 
-    @Override
-    public int getItemCount() {
+    @Override public int getItemCount() {
         return mItems.size();
     }
 
    public void deleteItem(int index){
-        mItems.remove(index);
-        notifyItemRemoved(index);
-    }
+       mItems.remove(index);
+       notifyItemRemoved(index);
+       notifyDataSetChanged();
+       notifyItemRangeChanged(index,mItems.size());
+       Log.d("삭제",String.valueOf(index));
+
+
+   }
 
 
 

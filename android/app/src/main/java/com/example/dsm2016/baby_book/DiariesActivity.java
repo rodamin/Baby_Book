@@ -1,7 +1,9 @@
 package com.example.dsm2016.baby_book;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -104,10 +106,26 @@ public class DiariesActivity extends BaseActivity  {
             }
 
             @Override
-            public void onLongItemClick(View view, int position) {
-                Toast.makeText(getApplicationContext(),"롱클릭",Toast.LENGTH_LONG).show();
+            public void onLongItemClick(View view, final int position) {
+                Toast.makeText(getApplicationContext(),"롱클릭"+position,Toast.LENGTH_LONG).show();
                     //삭제부분
-                adapter_mydiaries.deleteItem(position);
+                AlertDialog.Builder builder = new AlertDialog.Builder(DiariesActivity.this);
+                builder.setTitle("AlertDialog Title");
+                builder.setMessage("AlertDialog Content");
+                builder.setPositiveButton("삭제",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(getApplicationContext(),"삭제 합니다.",Toast.LENGTH_LONG).show();
+                               // adapter_mydiaries.deleteItem(position);
+                            }
+                        });
+                builder.setNegativeButton("취소",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(getApplicationContext(),"취소합니다.",Toast.LENGTH_LONG).show();
+                            }
+                        });
+                builder.show();
             }
         }));
 

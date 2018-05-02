@@ -30,7 +30,7 @@ import java.util.ArrayList;
 public class MyDiaryActivity extends BaseActivity {
 
     private RelativeLayout relative_all;
-    private TextView text_story, text_graph, text_video, text_babyinfo;
+    private TextView text_story, text_graph, text_video, text_babyinfo,text_title;
     private ImageButton btn_menu, btn_story, btn_graph, btn_video, btn_babyinfo;
     private FloatingActionButton float_add_diary;
     boolean temp = false;
@@ -57,6 +57,7 @@ public class MyDiaryActivity extends BaseActivity {
         btn_video = (ImageButton)findViewById(R.id.btn_video);
         btn_babyinfo = (ImageButton)findViewById(R.id.btn_baby_info);
         float_add_diary = (FloatingActionButton)findViewById(R.id.float_add_diary);
+        text_title=(TextView)findViewById(R.id.text_title);
 
         // 리사이클러뷰
         mRecyclerView=(RecyclerView)findViewById(R.id.showdiaries_rv);
@@ -80,7 +81,10 @@ public class MyDiaryActivity extends BaseActivity {
         int image = intent.getIntExtra("image",0);
         Log.d("dfdfdf",Integer.toString(image));
 
-
+        String title=intent.getStringExtra("title");
+        if(!title.isEmpty()){
+            text_title.setText(title);
+        }
         // 메뉴 클릭 시 인텐트
 
         btn_story.setOnClickListener(new View.OnClickListener() {

@@ -44,6 +44,7 @@ public class Dialog_Diaries_Title extends Dialog {
 
                 String title=title_et.getText().toString();
                 Intent intent=new Intent(getContext(), MyDiaryActivity.class);
+                intent.putExtra("title",title);
                 getContext().startActivity(intent);
                 dismiss();
             }
