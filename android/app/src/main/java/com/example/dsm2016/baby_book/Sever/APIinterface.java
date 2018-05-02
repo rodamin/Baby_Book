@@ -44,13 +44,13 @@ public interface APIinterface  {
     @FormUrlEncoded
     @POST("/login")
     Call<JsonArray> login(@Field("id") String id,
-                           @Field("password")String password);
+                          @Field("password")String password);
 
     @FormUrlEncoded
     @POST("/baby/store")
     Call<Void> baby(@Field("baby_name") String baby_name,
                     @Field("gender") int gender,
-                    @Field("birth") Date birth,
+                    @Field("birth") String birth,
                     @Field("code") int code);
 
     @FormUrlEncoded
@@ -58,7 +58,7 @@ public interface APIinterface  {
     Call<Void> baby_update(@Field("new_baby_name") String new_baby_name,
                            @Field("prev_baby_name") String prev_baby_name,
                            @Field("gender") int gender,
-                           @Field("birth") Date birth,
+                           @Field("birth") String birth,
                            @Field("code") int code);
 
     @POST("/growth/baby_name")

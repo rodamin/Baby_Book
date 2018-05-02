@@ -17,6 +17,8 @@ import com.example.dsm2016.baby_book.Sever.APIinterface;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import io.realm.Realm;
+import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -26,7 +28,8 @@ public class Change_BabyInfoActivity extends BaseActivity implements View.OnClic
 
     private Retrofit retrofit;
     private APIinterface apIinterface;
-    DB_Code db_code;
+    private Realm mRealm;
+    private DB_Code db_qna;
 
     private ImageButton btn_boy, btn_girl;
     private EditText edit_prev_name, edit_new_name, edit_birth;
@@ -81,30 +84,30 @@ public class Change_BabyInfoActivity extends BaseActivity implements View.OnClic
 
         String new_baby_name = edit_new_name.getText().toString();
         String prev_baby_name = edit_prev_name.getText().toString();
-        String date = edit_birth.getText().toString();
-        Date birth;
-        int code  = db_code.getCode();
+        String birth = edit_birth.getText().toString();
 
-        try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
-            birth = simpleDateFormat.parse(date);
+        mRealm = Realm.getDefaultInstance();
+        RealmResults<DB_Code> results=mRealm.where(DB_Code.class).findAll();
 
-            if(new_baby_name.equals("") || prev_baby_name.equals("") || birth.equals("") || gender == 2) {
-                Toast.makeText(getApplicationContext(),"꼭 입력해 주세요.",Toast.LENGTH_LONG).show();
-            } else if(new_baby_name.equals(" ") || prev_baby_name.equals(" ") || birth.equals(" ")) {
-                Toast.makeText(getApplicationContext(),"공백 금지",Toast.LENGTH_LONG).show();
-            } else if(!new_baby_name.isEmpty() && !prev_baby_name.isEmpty() && gender != 2 ) {
-                retrofit_new_babyinfo(new_baby_name, prev_baby_name, gender, birth, code);
-            }
+        for(int i=0;i<results.size();i++){
+            db_qna=results.get(i);
+            Log.d("db_qna", "protocol : " + db_qna);
+        }
 
-        } catch (java.text.ParseException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        int code = db_qna.getCode();
+        Log.d("xxx", code+"");
+
+        if(new_baby_name.equals("") || prev_baby_name.equals("") || birth.equals("") || gender == 2) {
+            Toast.makeText(getApplicationContext(),"꼭 입력해 주세요.",Toast.LENGTH_LONG).show();
+        } else if(new_baby_name.equals(" ") || prev_baby_name.equals(" ") || birth.equals(" ")) {
+            Toast.makeText(getApplicationContext(),"공백 금지",Toast.LENGTH_LONG).show();
+        } else if(!new_baby_name.isEmpty() && !prev_baby_name.isEmpty() && gender != 2 ) {
+            retrofit_new_babyinfo(new_baby_name, prev_baby_name, gender, birth, code);
         }
 
     }
 
-    public void retrofit_new_babyinfo(String new_baby_name, String prev_baby_name, int gender, Date birth, int code) {
+    public void retrofit_new_babyinfo(String new_baby_name, String prev_baby_name, int gender, String birth, int code) {
         Log.d("retrofit_new_babyinfo", "success");
         retrofit=new Retrofit.Builder().baseUrl(APIinterface.URL).build();
         apIinterface=retrofit.create(APIinterface.class);
