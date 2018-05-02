@@ -74,6 +74,10 @@ public class Adapter_Mydiaries extends RecyclerView.Adapter<Adapter_Mydiaries.Vi
         return mItems.size();
     }
 
+   public void deleteItem(int index){
+        mItems.remove(index);
+        notifyItemRemoved(index);
+    }
 
 
 

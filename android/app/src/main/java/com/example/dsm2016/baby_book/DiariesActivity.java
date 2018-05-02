@@ -24,6 +24,8 @@ import java.util.ArrayList;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
+import static java.nio.file.Files.delete;
+
 public class DiariesActivity extends BaseActivity  {
 
     private ImageView preview;
@@ -33,6 +35,7 @@ public class DiariesActivity extends BaseActivity  {
     private RecyclerView.Adapter madapter;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<Item_Mydairies> item_mydairies;
+    private Adapter_Mydiaries adapter_mydiaries;
     Item_Mydairies item;
     Dialog_Diaries_Title dialog;
     @Override
@@ -90,7 +93,7 @@ public class DiariesActivity extends BaseActivity  {
         //Log.d("dfdfdf",Integer.toString(image));
         //preview=(ImageView)findViewById(R.id.preview);
         //preview.setImageResource(item_mydairies.get(image).getImage());
-
+        adapter_mydiaries=new Adapter_Mydiaries(item_mydairies,getApplicationContext());
         recyclerView.addOnItemTouchListener(new RecyclerViewClickListener(getApplicationContext(),recyclerView,new RecyclerViewClickListener.OnItemClickListener(){
 
             @Override
@@ -102,8 +105,9 @@ public class DiariesActivity extends BaseActivity  {
 
             @Override
             public void onLongItemClick(View view, int position) {
-                    Toast.makeText(getApplicationContext(),"롱클릭",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"롱클릭",Toast.LENGTH_LONG).show();
                     //삭제부분
+                adapter_mydiaries.deleteItem(position);
             }
         }));
 

@@ -19,8 +19,10 @@ import android.widget.Toast;
 
 import com.example.dsm2016.baby_book.DB.DB_Code;
 import com.example.dsm2016.baby_book.Sever.APIinterface;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -122,7 +124,9 @@ public class LoginActivity extends BaseActivity{
                     startActivity(intent);
                     //String code=response.body().get("code").toString();
                     Log.d("코드",response.body().toString());
-
+                    JsonArray jsonArray=response.body().getAsJsonArray("code");
+                    JsonArray jsonElements=jsonArray.getAsJsonArray();
+                    Log.d("code",jsonElements.toString());
                     Realm.init(LoginActivity.this);
                     mRealm=Realm.getDefaultInstance();
                     mRealm.beginTransaction();
