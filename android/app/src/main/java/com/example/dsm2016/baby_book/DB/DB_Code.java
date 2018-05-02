@@ -9,8 +9,6 @@ import io.realm.RealmObject;
 public class DB_Code extends RealmObject {
     private int code;
 
-
-
     public int getCode() {
         return code;
     }

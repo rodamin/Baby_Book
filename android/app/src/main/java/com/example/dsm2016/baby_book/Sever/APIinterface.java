@@ -36,33 +36,32 @@ public interface APIinterface  {
     @FormUrlEncoded
     @POST("/conjoin")
     Call<Void> conjoin(@Field("id")String id,
-                    @Field("password")String password,
-                    @Field("name")String name,
-                    @Field("email")String email ,
-                    @Field("gender")int gender,
-                    @Field("other_id") String other_id);
+                       @Field("password")String password,
+                       @Field("name")String name,
+                       @Field("email")String email ,
+                       @Field("gender")int gender,
+                       @Field("other_id") String other_id);
     @FormUrlEncoded
     @POST("/login")
-    Call<JsonObject> login(@Field("id") String id,
-                     @Field("password")String password);
+    Call<JsonArray> login(@Field("id") String id,
+                           @Field("password")String password);
 
     @FormUrlEncoded
     @POST("/baby/store")
     Call<Void> baby(@Field("baby_name") String baby_name,
                     @Field("gender") int gender,
-                    @Field("birth") Date birth);
+                    @Field("birth") Date birth,
+                    @Field("code") int code);
 
     @FormUrlEncoded
     @POST("/baby/update")
-    Call<Void> baby(@Field("new_baby_name") String new_baby_name,
-                    @Field("prev_baby_name") String prev_baby_name,
-                    @Field("gender") int gender,
-                    @Field("birth") Date birth);
+    Call<Void> baby_update(@Field("new_baby_name") String new_baby_name,
+                           @Field("prev_baby_name") String prev_baby_name,
+                           @Field("gender") int gender,
+                           @Field("birth") Date birth,
+                           @Field("code") int code);
 
-    @GET("/growth/baby_name")
-    Call<JsonArray> growth_graph(@Query("baby_name") String baby_name,
-                                @Query("date") Date date,
-                                @Query("weight") int weight,
-                                @Query("height") int height);
-
+    @POST("/growth/baby_name")
+    Call<JsonArray> growth_graph(@Field("baby_namae") String baby_name,
+                                 @Field("code") int code);
 }

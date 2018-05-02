@@ -27,6 +27,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -102,20 +103,20 @@ public class LoginActivity extends BaseActivity{
         else{
             if (!id.isEmpty() && !pwd.isEmpty()) {
                 //레트로핏 로그인
-                Intent intent=new Intent(getApplicationContext(),DiariesActivity.class);
+                /*Intent intent=new Intent(getApplicationContext(),DiariesActivity.class);
                 startActivity(intent);
-                finish();
-               //retrofit_login(id,pwd);
+                finish();*/
+               retrofit_login(id,pwd);
             }
         }
     }
     public void retrofit_login(final String id, final String password){
         retrofit=new Retrofit.Builder().baseUrl(APIinterface.URL).addConverterFactory(GsonConverterFactory.create()).build();
         apIinterface=retrofit.create(APIinterface.class);
-        Call<JsonObject> call=apIinterface.login(id,password);
-        call.enqueue(new Callback<JsonObject>() {
+        Call<JsonArray> call=apIinterface.login(id,password);
+        call.enqueue(new Callback<JsonArray>() {
             @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+            public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
                 int status=response.code();
                 if(status==201){
 
@@ -124,15 +125,31 @@ public class LoginActivity extends BaseActivity{
                     startActivity(intent);
                     //String code=response.body().get("code").toString();
                     Log.d("코드",response.body().toString());
-                    JsonArray jsonArray=response.body().getAsJsonArray("code");
-                    JsonArray jsonElements=jsonArray.getAsJsonArray();
-                    Log.d("code",jsonElements.toString());
+                    JsonArray jsonArray=response.body();
+                    String code_res=jsonArray.get(0).getAsJsonObject().get("code").toString();
+                    int code=Integer.parseInt(code_res);
+                    Log.d("제발",jsonArray.get(0).getAsJsonObject().get("code").toString());
+
+
+
+//                    JsonArray jsonArray=response.body().getAsJsonArray("code");
+//                    JsonArray jsonElements=jsonArray.getAsJsonArray();
                     Realm.init(LoginActivity.this);
                     mRealm=Realm.getDefaultInstance();
                     mRealm.beginTransaction();
                     DB_Code db=mRealm.createObject(DB_Code.class);
-                    //db.setCode(code)
-                    mRealm.commitTransaction();
+                    db.setCode(code);
+                    mRealm = Realm.getDefaultInstance();
+
+                   RealmResults<DB_Code> results=mRealm.where(DB_Code.class).findAll();
+                   // results.deleteAllFromRealm();
+
+                    for(int i=0;i<results.size();i++){
+                        DB_Code db_qna=results.get(i);
+                        Log.d("dfdf", "protocol : " +db_qna);
+
+                    }
+                    //mRealm.commitTransaction();
                     finish();
                     Toast.makeText(getApplicationContext(),"로그인 성공",Toast.LENGTH_LONG).show();
                 }
@@ -143,7 +160,7 @@ public class LoginActivity extends BaseActivity{
             }
 
             @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
+            public void onFailure(Call<JsonArray> call, Throwable t) {
                 Toast.makeText(getApplicationContext(),"연결 실패",Toast.LENGTH_LONG).show();
                 Log.d("dfdfdfd","dfddfdfdf");
                 Log.d("연결 실패",t.getMessage());

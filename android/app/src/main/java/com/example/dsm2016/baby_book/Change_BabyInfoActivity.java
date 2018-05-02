@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.dsm2016.baby_book.DB.DB_Code;
 import com.example.dsm2016.baby_book.Sever.APIinterface;
 
 import java.text.SimpleDateFormat;
@@ -25,6 +26,7 @@ public class Change_BabyInfoActivity extends BaseActivity implements View.OnClic
 
     private Retrofit retrofit;
     private APIinterface apIinterface;
+    DB_Code db_code;
 
     private ImageButton btn_boy, btn_girl;
     private EditText edit_prev_name, edit_new_name, edit_birth;
@@ -81,6 +83,7 @@ public class Change_BabyInfoActivity extends BaseActivity implements View.OnClic
         String prev_baby_name = edit_prev_name.getText().toString();
         String date = edit_birth.getText().toString();
         Date birth;
+        int code  = db_code.getCode();
 
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
@@ -91,7 +94,7 @@ public class Change_BabyInfoActivity extends BaseActivity implements View.OnClic
             } else if(new_baby_name.equals(" ") || prev_baby_name.equals(" ") || birth.equals(" ")) {
                 Toast.makeText(getApplicationContext(),"공백 금지",Toast.LENGTH_LONG).show();
             } else if(!new_baby_name.isEmpty() && !prev_baby_name.isEmpty() && gender != 2 ) {
-                retrofit_new_babyinfo(new_baby_name, prev_baby_name, gender, birth);
+                retrofit_new_babyinfo(new_baby_name, prev_baby_name, gender, birth, code);
             }
 
         } catch (java.text.ParseException e) {
@@ -101,11 +104,11 @@ public class Change_BabyInfoActivity extends BaseActivity implements View.OnClic
 
     }
 
-    public void retrofit_new_babyinfo(String new_baby_name, String prev_baby_name, int gender, Date birth) {
+    public void retrofit_new_babyinfo(String new_baby_name, String prev_baby_name, int gender, Date birth, int code) {
         Log.d("retrofit_new_babyinfo", "success");
         retrofit=new Retrofit.Builder().baseUrl(APIinterface.URL).build();
         apIinterface=retrofit.create(APIinterface.class);
-        Call<Void> call=apIinterface.baby(new_baby_name, prev_baby_name, gender, birth);
+        Call<Void> call=apIinterface.baby_update(new_baby_name, prev_baby_name, gender, birth, code);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {

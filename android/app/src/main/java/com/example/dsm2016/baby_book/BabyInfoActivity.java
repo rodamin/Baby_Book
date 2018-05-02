@@ -13,11 +13,15 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.dsm2016.baby_book.DB.DB_Code;
 import com.example.dsm2016.baby_book.Sever.APIinterface;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import io.realm.Realm;
+import io.realm.RealmObject;
+import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -27,6 +31,8 @@ public class BabyInfoActivity extends BaseActivity implements View.OnClickListen
 
     private Retrofit retrofit;
     private APIinterface apIinterface;
+    Realm mRealm;
+    DB_Code db_code;
 
     private ImageButton btn_boy, btn_girl;
     private EditText edit_name, edit_birth;
@@ -54,6 +60,10 @@ public class BabyInfoActivity extends BaseActivity implements View.OnClickListen
         });
     }
 
+//    public class Code extends RealmObject {
+//        private int code;
+//    }
+
     @Override
     public void onClick(View view) {
         switch(view.getId()) {
@@ -76,9 +86,18 @@ public class BabyInfoActivity extends BaseActivity implements View.OnClickListen
         edit_name = (EditText)findViewById(R.id.edit_name);
         edit_birth = (EditText)findViewById(R.id.edit_birth);
 
+//        mRealm = Realm.getDefaultInstance();
+//        RealmResults<Code> results=mRealm.where(Code.class).findAll();
+//        for(int i=0;i<results.size();i++){
+//            Code db_qna=results.get(i);
+//            Log.d("xxx", "protocol : " +db_qna);
+//            list.add(new Item_Main(db_qna.getQuestion(),db_qna.getAnswer()));
+//        }
+
         String baby_name = edit_name.getText().toString();
         String date = edit_birth.getText().toString();
         Date birth;
+        int code = db_code.getCode();
 
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
@@ -89,7 +108,7 @@ public class BabyInfoActivity extends BaseActivity implements View.OnClickListen
             } else if(baby_name.equals(" ") || birth.equals(" ")) {
                 Toast.makeText(getApplicationContext(),"공백 금지",Toast.LENGTH_LONG).show();
             } else if(!baby_name.isEmpty() && gender != 2 ) {
-                retrofit_babyinfo(baby_name, birth, gender);
+                retrofit_babyinfo(baby_name, birth, gender, code);
             }
 
         } catch (java.text.ParseException e) {
@@ -98,11 +117,11 @@ public class BabyInfoActivity extends BaseActivity implements View.OnClickListen
         }
     }
 
-    public void retrofit_babyinfo(String baby_name, Date birth, int gender) {
+    public void retrofit_babyinfo(String baby_name, Date birth, int gender, int code) {
         Log.d("retrofit_babyinfo", "호출");
         retrofit=new Retrofit.Builder().baseUrl(APIinterface.URL).build();
         apIinterface=retrofit.create(APIinterface.class);
-        Call<Void> call=apIinterface.baby(baby_name, gender, birth);
+        Call<Void> call=apIinterface.baby(baby_name, gender, birth, code);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
