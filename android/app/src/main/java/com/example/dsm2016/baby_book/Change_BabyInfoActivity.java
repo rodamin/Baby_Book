@@ -121,10 +121,10 @@ public class Change_BabyInfoActivity extends BaseActivity implements View.OnClic
                     Intent intent=new Intent(getApplicationContext(),MyDiaryActivity.class);
                     startActivity(intent);
                     finish();
-                    Toast.makeText(getApplicationContext(),"new_baby_info 성공",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"수정 완료",Toast.LENGTH_LONG).show();
                 }
                 else if(status==404){
-                    Toast.makeText(getApplicationContext(),"new_baby_info 실패",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"기존의 아기 이름이 맞지 않습니다.",Toast.LENGTH_LONG).show();
                 }
             }
 

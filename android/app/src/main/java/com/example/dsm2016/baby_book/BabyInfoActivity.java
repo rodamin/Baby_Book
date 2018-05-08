@@ -61,10 +61,6 @@ public class BabyInfoActivity extends BaseActivity implements View.OnClickListen
         });
     }
 
-//    public class Code extends RealmObject {
-//        private int code;
-//    }
-
     @Override
     public void onClick(View view) {
         switch(view.getId()) {
@@ -110,7 +106,7 @@ public class BabyInfoActivity extends BaseActivity implements View.OnClickListen
         }
     }
 
-    public void retrofit_babyinfo(String baby_name, String birth, int gender, int code) {
+    public void retrofit_babyinfo(final String baby_name, String birth, int gender, int code) {
         Log.d("retrofit_babyinfo", "호출");
         retrofit=new Retrofit.Builder().baseUrl(APIinterface.URL).build();
         apIinterface=retrofit.create(APIinterface.class);
@@ -121,6 +117,9 @@ public class BabyInfoActivity extends BaseActivity implements View.OnClickListen
                 int status=response.code();
                 if(status==201){
                     Log.d("baby_info 전달","성공");
+                    Intent intent2 = new Intent(getApplicationContext(), GraphActivity.class);
+                    intent2.putExtra("baby_name", baby_name);
+
                     Intent intent=new Intent(getApplicationContext(),MyDiaryActivity.class);
                     startActivity(intent);
                     finish();

@@ -26,6 +26,7 @@ import retrofit2.http.Query;
 public interface APIinterface  {
 
     String URL="http://10.156.145.193:3000/";
+
     @FormUrlEncoded
     @POST("/join")
     Call<Void> join(@Field("id")String id,
@@ -59,6 +60,11 @@ public interface APIinterface  {
                            @Field("prev_baby_name") String prev_baby_name,
                            @Field("gender") int gender,
                            @Field("birth") String birth,
+                           @Field("code") int code);
+
+    @FormUrlEncoded
+    @POST("/baby/delete")
+    Call<Void> baby_delete(@Field("baby_name") String baby_name,
                            @Field("code") int code);
 
     @POST("/growth/baby_name")
