@@ -58,7 +58,7 @@ ENGINE = InnoDB;
 CREATE TABLE `BabyBook_Story` (
   `code` INT(8) NOT NULL,
   `baby_name` VARCHAR(32) NOT NULL,
-  `index` INT(1) NOT NULL,
+  `idx` INT(1) NOT NULL,
   `story` TEXT NULL DEFAULT NULL,
   PRIMARY KEY (`code`, `baby_name`, `index`),
   CONSTRAINT `fk_BabyBook_Story_Baby1`
@@ -90,9 +90,9 @@ CREATE TABLE `Image` (
   `code` INT(8) NOT NULL,
   `baby_name` VARCHAR(32) NOT NULL,
   `date_time` DATETIME NOT NULL,
-  `index` INT(1) NOT NULL,
+  `idx` INT(1) NOT NULL,
   `img_path` TEXT NOT NULL,
-  PRIMARY KEY (`code`, `baby_name`, `date_time`, `index`),
+  PRIMARY KEY (`code`, `baby_name`, `date_time`, `idx`),
   CONSTRAINT `fk_Image_Baby_Diary1`
     FOREIGN KEY (`code` , `baby_name` , `date_time`)
     REFERENCES `Baby_Diary` (`code` , `baby_name` , `date_time`)
