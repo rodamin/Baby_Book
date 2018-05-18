@@ -39,6 +39,7 @@
             android:textColor="#ffffff"/>
 
         <EditText
+            android:id="@+id/edit_story"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/cover_white"

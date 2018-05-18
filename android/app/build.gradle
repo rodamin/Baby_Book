@@ -42,7 +42,7 @@ dependencies {
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
     compile 'com.getbase:floatingactionbutton:1.10.1'
 
-  //  compile 'com.github.yongbeam:Android-Y-PhotoPicker:0.0.5'
+    //  compile 'com.github.yongbeam:Android-Y-PhotoPicker:0.0.5'
 
 }
 apply plugin: 'realm-android'

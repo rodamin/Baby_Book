@@ -107,7 +107,7 @@ public class Change_BabyInfoActivity extends BaseActivity implements View.OnClic
 
     }
 
-    public void retrofit_new_babyinfo(String new_baby_name, String prev_baby_name, int gender, String birth, int code) {
+    public void retrofit_new_babyinfo(final String new_baby_name, String prev_baby_name, int gender, String birth, int code) {
         Log.d("retrofit_new_babyinfo", "success");
         retrofit=new Retrofit.Builder().baseUrl(APIinterface.URL).build();
         apIinterface=retrofit.create(APIinterface.class);
@@ -119,6 +119,7 @@ public class Change_BabyInfoActivity extends BaseActivity implements View.OnClic
                 if(status==201){
                     Log.d("new_baby_info 전달",response.body()+"");
                     Intent intent=new Intent(getApplicationContext(),MyDiaryActivity.class);
+                    intent.putExtra("new_baby_name", new_baby_name);
                     startActivity(intent);
                     finish();
                     Toast.makeText(getApplicationContext(),"수정 완료",Toast.LENGTH_LONG).show();

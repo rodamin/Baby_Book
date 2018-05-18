@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 public class WriteDiaryActivity extends BaseActivity {
 
-    private Button btn_add_picture;
+    private Button btn_add_picture, btn_save;
     LayoutInflater mInflater;
     LinearLayout mRootLinear;
     private RecyclerView recyclerView;
@@ -39,6 +39,7 @@ public class WriteDiaryActivity extends BaseActivity {
         setContentView(R.layout.activity_write_diary);
 
         btn_add_picture = (Button)findViewById(R.id.btn_add_picture);
+        btn_save = (Button)findViewById(R.id.btn_save);
 
         mInflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
         mRootLinear = (LinearLayout)findViewById(R.id.viewgroup_add_picture);

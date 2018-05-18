@@ -17,6 +17,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -67,7 +68,34 @@ public interface APIinterface  {
     Call<Void> baby_delete(@Field("baby_name") String baby_name,
                            @Field("code") int code);
 
-    @POST("/growth/baby_name")
-    Call<JsonArray> growth_graph(@Field("baby_namae") String baby_name,
+    @GET("/baby/load/{code}")
+    Call<JsonArray> baby_call(@Path("code") int code);
+
+    @FormUrlEncoded
+    @POST("/growth/store")
+    Call<Void> growth_store(@Field("baby_name") String baby_name,
+                            @Field("date") String date,
+                            @Field("weight") int weight,
+                            @Field("height") int height,
+                            @Field("code") int code);
+
+    @FormUrlEncoded
+    @POST("/growth/update")
+    Call<Void> growth_update(@Field("baby_name") String baby_name,
+                            @Field("date") String date,
+                            @Field("weight") int weight,
+                            @Field("height") int height,
+                            @Field("code") int code);
+
+    @FormUrlEncoded
+    @POST("/growth/select")
+    Call<JsonArray> growth_graph(@Field("baby_name") String baby_name,
                                  @Field("code") int code);
+
+    @FormUrlEncoded
+    @POST("/story/write")
+    Call<Void> story_write(@Field("baby_name") String baby_name,
+                           @Field("idx") int idx,
+                           @Field("story") String story,
+                           @Field("code") int code);
 }

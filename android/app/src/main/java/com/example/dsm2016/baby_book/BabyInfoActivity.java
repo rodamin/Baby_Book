@@ -117,10 +117,9 @@ public class BabyInfoActivity extends BaseActivity implements View.OnClickListen
                 int status=response.code();
                 if(status==201){
                     Log.d("baby_info 전달","성공");
-                    Intent intent2 = new Intent(getApplicationContext(), GraphActivity.class);
-                    intent2.putExtra("baby_name", baby_name);
 
                     Intent intent=new Intent(getApplicationContext(),MyDiaryActivity.class);
+                    intent.putExtra("baby_name", baby_name);
                     startActivity(intent);
                     finish();
                     Toast.makeText(getApplicationContext(),"baby_info 성공",Toast.LENGTH_LONG).show();

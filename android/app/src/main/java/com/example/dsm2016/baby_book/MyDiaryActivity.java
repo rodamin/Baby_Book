@@ -30,8 +30,8 @@ import java.util.ArrayList;
 public class MyDiaryActivity extends BaseActivity {
 
     private RelativeLayout relative_all;
-    private TextView text_story, text_graph, text_video, text_babyinfo,text_title;
-    private ImageButton btn_menu, btn_story, btn_graph, btn_video, btn_babyinfo;
+    private TextView text_story, text_graph, text_video, text_babyinfo,text_growth, text_title;
+    private ImageButton btn_menu, btn_story, btn_graph, btn_video, btn_babyinfo, btn_growth;
     private FloatingActionButton float_add_diary;
     boolean temp = false;
 
@@ -47,15 +47,18 @@ public class MyDiaryActivity extends BaseActivity {
         setContentView(R.layout.activity_my_diary);
 
         relative_all = (RelativeLayout)findViewById(R.id.relative_all);
+        text_title = (TextView)findViewById(R.id.text_title);
         text_story = (TextView)findViewById(R.id.text_story);
         text_graph = (TextView)findViewById(R.id.text_graph);
         text_video = (TextView)findViewById(R.id.text_video);
         text_babyinfo = (TextView)findViewById(R.id.text_babyinfo);
+        text_growth = (TextView)findViewById(R.id.text_growth_info);
         btn_menu = (ImageButton)findViewById(R.id.btn_menu);
         btn_story = (ImageButton)findViewById(R.id.btn_story);
         btn_graph = (ImageButton)findViewById(R.id.btn_graph);
         btn_video = (ImageButton)findViewById(R.id.btn_video);
         btn_babyinfo = (ImageButton)findViewById(R.id.btn_baby_info);
+        btn_growth = (ImageButton)findViewById(R.id.btn_growth_info);
         float_add_diary = (FloatingActionButton)findViewById(R.id.float_add_diary);
         text_title=(TextView)findViewById(R.id.text_title);
 
@@ -79,12 +82,16 @@ public class MyDiaryActivity extends BaseActivity {
 
         Intent intent = getIntent();
         int image = intent.getIntExtra("image",0);
+        String baby_name = intent.getStringExtra("baby_name");
+        Log.d("baby_name intent", baby_name);
         Log.d("dfdfdf",Integer.toString(image));
 
-        String title=intent.getStringExtra("title");
-        if(!title.isEmpty()){
-            text_title.setText(title);
-        }
+        text_title.setText(baby_name + " 앨범");
+
+//        String title=intent.getStringExtra("title");
+//        if(!title.isEmpty()){
+//            text_title.setText(title);
+//        }
         // 메뉴 클릭 시 인텐트
 
         btn_story.setOnClickListener(new View.OnClickListener() {
@@ -116,6 +123,14 @@ public class MyDiaryActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), Change_BabyInfoActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_growth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), GrowthInfoActivity.class);
                 startActivity(intent);
             }
         });
@@ -160,6 +175,8 @@ public class MyDiaryActivity extends BaseActivity {
         btn_video.startAnimation(menu_open);
         btn_babyinfo.setVisibility(View.VISIBLE);
         btn_babyinfo.startAnimation(menu_open);
+        btn_growth.setVisibility(View.VISIBLE);
+        btn_growth.startAnimation(menu_open);
         text_story.setVisibility(View.VISIBLE);
         text_story.setAnimation(menu_open);
         text_graph.setVisibility(View.VISIBLE);
@@ -168,6 +185,8 @@ public class MyDiaryActivity extends BaseActivity {
         text_video.setAnimation(menu_open);
         text_babyinfo.setVisibility(View.VISIBLE);
         text_babyinfo.setAnimation(menu_open);
+        text_growth.setVisibility(View.VISIBLE);
+        text_growth.setAnimation(menu_open);
     }
 
     public void ani_menu_off() {
@@ -185,6 +204,8 @@ public class MyDiaryActivity extends BaseActivity {
         btn_video.startAnimation(menu_close);
         btn_babyinfo.setVisibility(View.INVISIBLE);
         btn_babyinfo.startAnimation(menu_close);
+        btn_growth.setVisibility(View.INVISIBLE);
+        btn_growth.startAnimation(menu_close);
         text_story.setVisibility(View.INVISIBLE);
         text_story.setAnimation(menu_close);
         text_graph.setVisibility(View.INVISIBLE);
@@ -193,6 +214,8 @@ public class MyDiaryActivity extends BaseActivity {
         text_video.setAnimation(menu_close);
         text_babyinfo.setVisibility(View.INVISIBLE);
         text_babyinfo.setAnimation(menu_close);
+        text_growth.setVisibility(View.INVISIBLE);
+        text_growth.setAnimation(menu_close);
     }
 }
 

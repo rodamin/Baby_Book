@@ -18,13 +18,26 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.dsm2016.baby_book.Adapter.Adapter_Mydiaries;
+import com.example.dsm2016.baby_book.DB.DB_Code;
 import com.example.dsm2016.baby_book.Dialog.Dialog_Diaries_Title;
 import com.example.dsm2016.baby_book.Item.Item_Mydairies;
+import com.example.dsm2016.baby_book.Sever.APIinterface;
 import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.github.mikephil.charting.data.DataSet;
+import com.google.gson.JsonArray;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Iterator;
 
+import io.realm.Realm;
+import io.realm.RealmResults;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import static java.nio.file.Files.delete;
 
@@ -40,13 +53,21 @@ public class DiariesActivity extends BaseActivity  {
     private Adapter_Mydiaries adapter_mydiaries;
     Item_Mydairies item;
     Dialog_Diaries_Title dialog;
+
+    private Retrofit retrofit;
+    private APIinterface apIinterface;
+    Realm mRealm;
+    DB_Code db_qna;
+
+    private String new_baby_name;
+    private Object value;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diaries);
 
         DisplayMetrics dm = getApplicationContext().getResources().getDisplayMetrics(); //디바이스 화면크기를 구하기위해
-
         dialog=new Dialog_Diaries_Title(this);
         WindowManager.LayoutParams wm = dialog.getWindow().getAttributes();  //다이얼로그의 높이 너비 설정하기위해
         wm.copyFrom(dialog.getWindow().getAttributes());  //여기서 설정한값을 그대로 다이얼로그에 넣겠다는의미
@@ -58,7 +79,9 @@ public class DiariesActivity extends BaseActivity  {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(),"버튼",Toast.LENGTH_LONG).show();
-                dialog.show();
+                Intent intent = new Intent(getApplicationContext(), BabyInfoActivity.class);
+                startActivity(intent);
+//                dialog.show();
             }
         });
         btn_calendar = (Button)findViewById(R.id.btn_calendar);
@@ -82,13 +105,10 @@ public class DiariesActivity extends BaseActivity  {
         madapter=new Adapter_Mydiaries(item_mydairies,getApplicationContext());
         recyclerView.setAdapter(madapter);
 
-
         item_mydairies.add(new Item_Mydairies(R.drawable.background_main));
         item_mydairies.add(new Item_Mydairies(R.drawable.test));
         item_mydairies.add(new Item_Mydairies(R.drawable.test2));
         item_mydairies.add(new Item_Mydairies(R.drawable.test3));
-
-
 
        //Intent intent=getIntent();
         //int image=intent.getIntExtra("image",0);
@@ -129,7 +149,41 @@ public class DiariesActivity extends BaseActivity  {
             }
         }));
 
+        // 모든 앨범(아기이름) 불러오는 retrofit
+        mRealm = Realm.getDefaultInstance();
+        RealmResults<DB_Code> results = mRealm.where(DB_Code.class).findAll();
 
+        for(int i = 0; i < results.size(); i++){
+            db_qna = results.get(i);
+            Log.d("db_qna", "protocol : " + db_qna);
+        }
+
+        int code = db_qna.getCode();
+        Log.d("getCode", code+"");
+
+        retrofit=new Retrofit.Builder().baseUrl(APIinterface.URL).addConverterFactory(GsonConverterFactory.create()).build();
+        apIinterface=retrofit.create(APIinterface.class);
+        Call<JsonArray> call=apIinterface.baby_call(code);
+        call.enqueue(new Callback<JsonArray>() {
+            @Override
+            public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
+                int status=response.code();
+                if(status==201){
+                    Log.d("baby_call 통신","성공");
+                    Log.d("onResponse: ", response.body().toString());
+
+                    Toast.makeText(getApplicationContext(),"아기들 불러오기 성공",Toast.LENGTH_LONG).show();
+                }
+                else if(status==404){
+                    Toast.makeText(getApplicationContext(),"아기들 불러오기 실패",Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonArray> call, Throwable t) {
+                Log.d("연결","실패"+t.getMessage());
+            }
+        });
     }
 
 
