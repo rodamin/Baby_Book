@@ -66,7 +66,5 @@ public class WriteDiaryActivity extends BaseActivity {
         mitem.add(new Item_write_diary(R.drawable.test3));
         mitem.add(new Item_write_diary(R.drawable.test));
         mitem.add(new Item_write_diary(R.drawable.test3));
-
-
     }
 }

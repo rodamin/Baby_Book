@@ -1,5 +1,6 @@
 package com.example.dsm2016.baby_book.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -17,13 +18,23 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.dsm2016.baby_book.DB.DB_Code;
 import com.example.dsm2016.baby_book.DiariesActivity;
 import com.example.dsm2016.baby_book.Item.Item_Mydairies;
 import com.example.dsm2016.baby_book.R;
+import com.example.dsm2016.baby_book.Sever.APIinterface;
+import com.google.gson.JsonArray;
 
 import java.util.ArrayList;
 
+import io.realm.Realm;
+import io.realm.RealmResults;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.support.v4.content.ContextCompat.startActivity;
 import static android.support.v7.widget.RecyclerView.*;
@@ -42,6 +53,13 @@ public class Adapter_Mydiaries extends RecyclerView.Adapter<Adapter_Mydiaries.Vi
         this.mItems = items;
         this.context=context;
     }
+
+    private static Context sContext;
+    private Retrofit retrofit;
+    private APIinterface apIinterface;
+    Realm mRealm;
+    DB_Code db_qna;
+
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_diaries,parent,false);
@@ -73,17 +91,50 @@ public class Adapter_Mydiaries extends RecyclerView.Adapter<Adapter_Mydiaries.Vi
         return mItems.size();
     }
 
-   public void deleteItem(int index){
-       mItems.remove(index);
-       notifyItemRemoved(index);
-       notifyDataSetChanged();
-       notifyItemRangeChanged(index,mItems.size());
-       Log.d("삭제",String.valueOf(index));
+    public void deleteItem(int index){
+        mItems.remove(index);
+        notifyItemRemoved(index);
+        notifyDataSetChanged();
+        notifyItemRangeChanged(index,mItems.size());
+        Log.d("삭제",String.valueOf(index));
 
+        mRealm = Realm.getDefaultInstance();
+        RealmResults<DB_Code> results = mRealm.where(DB_Code.class).findAll();
 
-   }
+        for(int i = 0; i < results.size(); i++){
+            db_qna = results.get(i);
+            Log.d("db_qna", "protocol : " + db_qna);
+        }
 
+        int code = db_qna.getCode();
+        Log.d("getCode", code+"");
 
+        String baby_name = "ParkHaeBin";
+
+        retrofit=new Retrofit.Builder().baseUrl(APIinterface.URL).addConverterFactory(GsonConverterFactory.create()).build();
+        apIinterface=retrofit.create(APIinterface.class);
+        Call<Void> call=apIinterface.baby_delete(baby_name, code);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                int status=response.code();
+                if(status==201){
+                    Log.d("baby_call 통신","성공");
+                    Log.d("onResponse: ", response.body().toString());
+                    Toast.makeText((Activity) sContext.getApplicationContext(),"아기들 불러오기 성공",Toast.LENGTH_LONG).show();
+                }
+                else if(status==404){
+                    Toast.makeText((Activity) sContext.getApplicationContext(),"아기들 불러오기 실패",Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.d("연결","실패"+t.getMessage());
+            }
+        });
+
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView imageView;
