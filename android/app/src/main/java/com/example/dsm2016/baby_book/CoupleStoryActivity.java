@@ -33,9 +33,6 @@ public class CoupleStoryActivity extends BaseActivity {
 
         edit_story = (EditText)findViewById(R.id.edit_story);
 
-        Intent intent = getIntent();
-        String baby_name = intent.getStringExtra("baby_name");
-
         int idx = 1;
         String story = edit_story.getText().toString();
 
@@ -49,6 +46,8 @@ public class CoupleStoryActivity extends BaseActivity {
 
         int code = db_qna.getCode();
         Log.d("xxx", code+"");
+
+        String baby_name = "ParkHaeBin";
 
 
         retrofit=new Retrofit.Builder().baseUrl(APIinterface.URL).build();
