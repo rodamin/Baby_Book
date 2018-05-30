@@ -150,7 +150,7 @@ public class DiariesActivity extends BaseActivity  {
         }));
 
         // 모든 앨범(아기이름) 불러오는 retrofit
-        mRealm = Realm.getDefaultInstance();
+       /* mRealm = Realm.getDefaultInstance();
         RealmResults<DB_Code> results = mRealm.where(DB_Code.class).findAll();
 
         for(int i = 0; i < results.size(); i++){
@@ -164,6 +164,7 @@ public class DiariesActivity extends BaseActivity  {
         retrofit=new Retrofit.Builder().baseUrl(APIinterface.URL).addConverterFactory(GsonConverterFactory.create()).build();
         apIinterface=retrofit.create(APIinterface.class);
         Call<JsonArray> call=apIinterface.baby_call(code);
+
         call.enqueue(new Callback<JsonArray>() {
             @Override
             public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
@@ -183,7 +184,7 @@ public class DiariesActivity extends BaseActivity  {
             public void onFailure(Call<JsonArray> call, Throwable t) {
                 Log.d("연결","실패"+t.getMessage());
             }
-        });
+        });*/
     }
 
 

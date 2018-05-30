@@ -1,24 +1,24 @@
 package com.example.dsm2016.baby_book.Sever;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
-import com.google.gson.JsonObject;
 
 import com.google.gson.JsonArray;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
-import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
+import retrofit2.http.PartMap;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 /**
  * Created by ghdth on 2018-04-24.
@@ -98,4 +98,14 @@ public interface APIinterface  {
                            @Field("idx") int idx,
                            @Field("story") String story,
                            @Field("code") int code);
+    @Multipart
+    @POST("/diary/add")
+    Call<Void> save(@Part("baby_name") String baby_name,
+                            @Part("date_time") Date date_time,
+                            @Part("subject")String subject,
+                            @Part("diary")String diary,
+                            @Part("code")int code,
+                            @PartMap() Map<String, RequestBody> filelist);
+
+
 }

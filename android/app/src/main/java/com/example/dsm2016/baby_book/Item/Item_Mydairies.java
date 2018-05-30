@@ -5,8 +5,10 @@ package com.example.dsm2016.baby_book.Item;
  */
 
 public class Item_Mydairies {
-   private int image;
-   private int postion;
+    private int image;
+    private int postion;
+    private String baby_name;
+    private String date;
 
     public int getPostion() {
         return postion;
@@ -24,5 +26,6 @@ public class Item_Mydairies {
     }
     public Item_Mydairies(int image){
         this.image=image;
+
     }
 }

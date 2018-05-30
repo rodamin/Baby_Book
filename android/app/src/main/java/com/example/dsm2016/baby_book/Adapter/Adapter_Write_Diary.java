@@ -3,11 +3,15 @@ package com.example.dsm2016.baby_book.Adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
+import com.example.dsm2016.baby_book.Item.Item_Write_diary_Image;
 import com.example.dsm2016.baby_book.Item.Item_write_diary;
 import com.example.dsm2016.baby_book.R;
 
@@ -18,10 +22,11 @@ import java.util.ArrayList;
  */
 
 public class Adapter_Write_Diary extends RecyclerView.Adapter<Adapter_Write_Diary.ViewHolder> {
-    private ArrayList<Item_write_diary> mItem;
+    private ArrayList<Item_Write_diary_Image> mItem;
     private Context context;
     private LayoutInflater layoutInflater;
-    public Adapter_Write_Diary(ArrayList<Item_write_diary> mItem,Context context){
+    // private RequestManager requestManager;
+    public Adapter_Write_Diary(ArrayList<Item_Write_diary_Image> mItem, Context context){
         this.mItem=mItem;
         this.context=context;
     }
@@ -35,13 +40,15 @@ public class Adapter_Write_Diary extends RecyclerView.Adapter<Adapter_Write_Diar
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.imageView.setImageResource(mItem.get(position).getImage());
-
+        // holder.imageView.setImageResource(mItem.get(position).getImage());
+        Glide.with(context).load(mItem.get(position).getUri()).into(holder.imageView);
+        Log.d("ㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴimage:",(mItem.get(position).getUri().toString()));
     }
 
 
     @Override
     public int getItemCount() {
+        Log.d("mItem.size()",String.valueOf(mItem.size()));
         return mItem.size();
     }
 
