@@ -43,11 +43,13 @@ public class GrowthInfoActivity extends AppCompatActivity {
         btn_save = (Button)findViewById(R.id.btn_save);
 
 
+
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                String baby_name = "JeongGeunCheol";
+                String baby_name = "ParkHaeBin";
+
                 String date = getNowDate();
                 int height = Integer.parseInt(edit_height.getText().toString());
                 int weight = Integer.parseInt(edit_weight.getText().toString());
@@ -95,7 +97,7 @@ public class GrowthInfoActivity extends AppCompatActivity {
 
     public String getNowDate() {
         SimpleDateFormat formatter
-                = new SimpleDateFormat("yyyyMMdd", Locale.KOREA);
+                = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
         Date date = new Date();
         String currentDate = formatter.format(date);
 

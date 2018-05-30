@@ -48,10 +48,8 @@ public class SignupActivity extends BaseActivity {
                 signup_btn();
             }
         });
-
-
-
     }
+
     RadioGroup.OnCheckedChangeListener radioGroupButtonChangeListener=new RadioGroup.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(RadioGroup radioGroup, int i) {
