@@ -60,7 +60,7 @@ CREATE TABLE `BabyBook_Story` (
   `baby_name` VARCHAR(32) NOT NULL,
   `idx` INT(1) NOT NULL,
   `story` TEXT NULL DEFAULT NULL,
-  PRIMARY KEY (`code`, `baby_name`, `index`),
+  PRIMARY KEY (`code`, `baby_name`, `idx`),
   CONSTRAINT `fk_BabyBook_Story_Baby1`
     FOREIGN KEY (`code` , `baby_name`)
     REFERENCES `Baby` (`code` , `baby_name`)
@@ -119,7 +119,7 @@ ENGINE = InnoDB;
 CREATE TABLE `Video` (
   `code` INT(8) NOT NULL,
   `baby_name` VARCHAR(32) NOT NULL,
-  `vidio_path` TEXT NOT NULL,
+  `video_path` TEXT NOT NULL,
   PRIMARY KEY (`code`, `baby_name`),
   CONSTRAINT `fk_Video_Baby1`
     FOREIGN KEY (`code` , `baby_name`)
