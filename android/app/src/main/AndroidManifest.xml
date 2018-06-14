@@ -29,7 +29,13 @@
         <activity android:name=".SignupActivity" />
         <activity android:name=".BabyInfoActivity" />
         <activity android:name=".CalendarActivity" />
-        <activity android:name=".GraphActivity" />
+        <activity android:name=".GraphActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".CoupleStoryActivity" />
         <activity android:name=".MarryStoryActivity" />
         <activity android:name=".BabyStoryActivity" />

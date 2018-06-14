@@ -81,10 +81,10 @@ public class MyDiaryActivity extends BaseActivity {
         item_showDiaries.add(new Item_ShowDiaries(R.drawable.test3));
 
         Intent intent = getIntent();
-        int image = intent.getIntExtra("image",0);
+//        int image = intent.getIntExtra("image",0);
         String baby_name = intent.getStringExtra("baby_name");
         Log.d("baby_name intent", baby_name);
-        Log.d("dfdfdf",Integer.toString(image));
+//        Log.d("dfdfdf",Integer.toString(image));
 
         text_title.setText(baby_name + " 앨범");
 
