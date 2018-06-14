@@ -112,7 +112,8 @@ public class LoginActivity extends BaseActivity{
         }
     }
     public void retrofit_login(final String id, final String password){
-        retrofit=new Retrofit.Builder().baseUrl(APIinterface.URL).addConverterFactory(GsonConverterFactory.create()).build();
+        retrofit=new Retrofit.Builder().baseUrl(APIinterface.URL).
+                addConverterFactory(GsonConverterFactory.create()).build();
         apIinterface=retrofit.create(APIinterface.class);
         Call<JsonArray> call=apIinterface.login(id,password);
         call.enqueue(new Callback<JsonArray>() {

@@ -7,16 +7,16 @@ import android.net.Uri;
  */
 
 public class Item_Write_diary_Image {
-    private Uri uri;
+    private String uri;
 
-    public Item_Write_diary_Image(Uri uri){
+    public Item_Write_diary_Image(String uri){
         this.uri=uri;
     }
-    public Uri getUri() {
+    public String getUri() {
         return uri;
     }
 
-    public void setUri(Uri uri) {
+    public void setUri(String uri) {
         this.uri = uri;
     }
 }

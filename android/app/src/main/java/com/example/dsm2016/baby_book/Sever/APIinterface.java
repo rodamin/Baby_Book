@@ -26,7 +26,7 @@ import retrofit2.http.Path;
 
 public interface APIinterface  {
 
-    String URL="http://10.156.145.193:3000/";
+    String URL="http://192.168.43.93:2018/";
 
     @FormUrlEncoded
     @POST("/join")
@@ -100,11 +100,11 @@ public interface APIinterface  {
                            @Field("code") int code);
     @Multipart
     @POST("/diary/add")
-    Call<Void> save(@Part("baby_name") String baby_name,
-                            @Part("date_time") Date date_time,
-                            @Part("subject")String subject,
-                            @Part("diary")String diary,
-                            @Part("code")int code,
+    Call<ResponseBody> save(@Part("baby_name") RequestBody baby_name,
+                            @Part("date_time") RequestBody date_time,
+                            @Part("subject") RequestBody subject,
+                            @Part("diary") RequestBody diary,
+                            @Part("code")RequestBody code,
                             @PartMap() Map<String, RequestBody> filelist);
 
 

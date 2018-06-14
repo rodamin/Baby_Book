@@ -1,24 +1,12 @@
 package com.example.dsm2016.baby_book;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.media.ExifInterface;
 import android.net.Uri;
-import android.os.Build;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -31,16 +19,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.bumptech.glide.disklrucache.DiskLruCache;
 import com.example.dsm2016.baby_book.Adapter.Adapter_Write_Diary;
 import com.example.dsm2016.baby_book.DB.DB_Code;
 import com.example.dsm2016.baby_book.Item.Item_Write_diary_Image;
-import com.example.dsm2016.baby_book.Item.Item_write_diary;
 import com.example.dsm2016.baby_book.Sever.APIinterface;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -49,12 +32,13 @@ import java.util.HashMap;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class WriteDiaryActivity extends BaseActivity {
 
@@ -149,11 +133,11 @@ public class WriteDiaryActivity extends BaseActivity {
     public void Save(){
         String title=title_et.getText().toString();
         String content=content_et.getText().toString();
-        Date date=getTime();
-        int code=code();
-        String baby_name;
+        String date=getTime();
+        int code=1;
+        String baby_name="Park HaeBin";
 
-
+        retorofit_save(title,content,date,code,baby_name);
 
 
     }
@@ -177,7 +161,7 @@ public class WriteDiaryActivity extends BaseActivity {
             switch (requestCode){
                 case REQ_CODE_SELECT_IMAGE:
                     uri=data.getData();
-                    mitem.add(new Item_Write_diary_Image(uri));
+                    mitem.add(new Item_Write_diary_Image(String.valueOf(uri)));
                     filepath=getPath(uri);
                    // filename=filepath.substring(filepath.lastIndexOf("/")+1);
                     arrayList=new ArrayList<>();
@@ -206,10 +190,11 @@ public class WriteDiaryActivity extends BaseActivity {
         return result;
     }
 
-    public Date getTime(){
+    public String getTime(){
         mNow = System.currentTimeMillis();
         mDate = new Date(mNow);
-        return mDate;
+
+        return mFormat.format(mDate) ;
 
 
     }
@@ -227,7 +212,9 @@ public class WriteDiaryActivity extends BaseActivity {
         code=db_code.getCode();
         return  code;
     }
-    public void retorofit_save(String title,String content,Date date,int code,String baby_name){
+    //public static final String MULTIPART_FORM_DATA = "multipart/form-data";
+
+    public void retorofit_save(String title, String content, String date, int code, String baby_name){
 
         HashMap<String, RequestBody> map=new HashMap<>(arrayList.size());
         RequestBody file=null;
@@ -236,11 +223,18 @@ public class WriteDiaryActivity extends BaseActivity {
             map.put(("file\"; filename=\"" + "photoname" + i + ".jpg"), file);
 
         }
-        retrofit=new Retrofit.Builder().baseUrl(APIinterface.URL).build();
-        Call<Void> call=apIinterface.save(baby_name,date,title,content,code,map);
-        call.enqueue(new Callback<Void>() {
+        Log.d("data",title+content+String.valueOf(date)+String.valueOf(code)+baby_name+" "+String.valueOf(map));
+        MediaType text = MediaType.parse("text/plain");
+        retrofit=new Retrofit.Builder().baseUrl(APIinterface.URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        apIinterface=retrofit.create(APIinterface.class);
+        Call<ResponseBody> call=apIinterface.save(RequestBody.create(text,baby_name),RequestBody.create(text,String.valueOf(date)),
+                RequestBody.create(text,title),RequestBody.create(text,content),
+                RequestBody.create(text,String.valueOf(code)),map);
+        call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 int stuatus=response.code();
                 if(stuatus==201){
                     Toast.makeText(getApplicationContext(),"성공",Toast.LENGTH_LONG).show();
@@ -252,7 +246,7 @@ public class WriteDiaryActivity extends BaseActivity {
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Toast.makeText(getApplicationContext(),"실패",Toast.LENGTH_LONG).show();
                 Log.d("연결 실패",t.getMessage());
             }
