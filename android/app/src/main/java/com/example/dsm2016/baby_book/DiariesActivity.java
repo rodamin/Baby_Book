@@ -25,6 +25,9 @@ import com.example.dsm2016.baby_book.Sever.APIinterface;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.github.mikephil.charting.data.DataSet;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -67,6 +70,7 @@ public class DiariesActivity extends BaseActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diaries);
 
+        mRealm.init(this);
         DisplayMetrics dm = getApplicationContext().getResources().getDisplayMetrics(); //디바이스 화면크기를 구하기위해
         dialog=new Dialog_Diaries_Title(this);
         WindowManager.LayoutParams wm = dialog.getWindow().getAttributes();  //다이얼로그의 높이 너비 설정하기위해
@@ -94,35 +98,20 @@ public class DiariesActivity extends BaseActivity  {
             }
         });
 
+
         recyclerView=(RecyclerView)findViewById(R.id.diaries_rv);
         recyclerView.setHasFixedSize(true);
 
         layoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(new GridLayoutManager(this,2));
 
-
         item_mydairies=new ArrayList<>();
-        madapter=new Adapter_Mydiaries(item_mydairies,getApplicationContext());
-        recyclerView.setAdapter(madapter);
-
-        item_mydairies.add(new Item_Mydairies(R.drawable.background_main));
-        item_mydairies.add(new Item_Mydairies(R.drawable.test));
-        item_mydairies.add(new Item_Mydairies(R.drawable.test2));
-        item_mydairies.add(new Item_Mydairies(R.drawable.test3));
-
-       //Intent intent=getIntent();
-        //int image=intent.getIntExtra("image",0);
-        //Log.d("dfdfdf",Integer.toString(image));
-        //preview=(ImageView)findViewById(R.id.preview);
-        //preview.setImageResource(item_mydairies.get(image).getImage());
-        adapter_mydiaries=new Adapter_Mydiaries(item_mydairies,getApplicationContext());
         recyclerView.addOnItemTouchListener(new RecyclerViewClickListener(getApplicationContext(),recyclerView,new RecyclerViewClickListener.OnItemClickListener(){
 
             @Override
             public void onItemClick(View view, int position) {
                 preview=(ImageView)findViewById(R.id.preview);
                 preview.setImageResource(item_mydairies.get(position).getImage());
-
             }
 
             @Override
@@ -150,7 +139,7 @@ public class DiariesActivity extends BaseActivity  {
         }));
 
         // 모든 앨범(아기이름) 불러오는 retrofit
-       /* mRealm = Realm.getDefaultInstance();
+        mRealm = Realm.getDefaultInstance();
         RealmResults<DB_Code> results = mRealm.where(DB_Code.class).findAll();
 
         for(int i = 0; i < results.size(); i++){
@@ -171,8 +160,19 @@ public class DiariesActivity extends BaseActivity  {
                 int status=response.code();
                 if(status==201){
                     Log.d("baby_call 통신","성공");
-                    Log.d("onResponse: ", response.body().toString());
+                    JsonArray jsonArray = response.body();
+                    Log.d("onResponse:", jsonArray.toString());
 
+                    for(int i = 0; i < jsonArray.size(); i++) {
+                        Item_Mydairies item=new Item_Mydairies();
+                        Log.d("personal", jsonArray.get(i).getAsJsonObject().get("baby_name").getAsString());
+                         String baby=jsonArray.get(i).getAsJsonObject().get("baby_name").getAsString();
+                         item.setBaby_name(baby);
+                         item.setImage(R.drawable.background_main);
+                        item_mydairies.add(item);
+                   }
+                   madapter = new Adapter_Mydiaries(item_mydairies, getApplicationContext());
+                    recyclerView.setAdapter(madapter);
                     Toast.makeText(getApplicationContext(),"아기들 불러오기 성공",Toast.LENGTH_LONG).show();
                 }
                 else if(status==404){
@@ -184,7 +184,12 @@ public class DiariesActivity extends BaseActivity  {
             public void onFailure(Call<JsonArray> call, Throwable t) {
                 Log.d("연결","실패"+t.getMessage());
             }
-        });*/
+        });
+
+//        item_mydairies.add(new Item_Mydairies(R.drawable.background_main,"dwdd"));
+//        item_mydairies.add(new Item_Mydairies(R.drawable.test,"tgtgtg"));
+//        item_mydairies.add(new Item_Mydairies(R.drawable.test2,"gggf"));
+//        item_mydairies.add(new Item_Mydairies(R.drawable.test3,"ghghg"));
     }
 
 

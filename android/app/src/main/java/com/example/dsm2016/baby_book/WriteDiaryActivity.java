@@ -133,10 +133,11 @@ public class WriteDiaryActivity extends BaseActivity {
     public void Save(){
         String title=title_et.getText().toString();
         String content=content_et.getText().toString();
+        Intent intent=getIntent();
         String date=getTime();
         int code=1;
-        String baby_name="Park HaeBin";
-
+        String baby_name=intent.getStringExtra("baby_name");
+        Log.d("baby_name:",baby_name);
         retorofit_save(title,content,date,code,baby_name);
 
 
@@ -167,6 +168,7 @@ public class WriteDiaryActivity extends BaseActivity {
                     arrayList=new ArrayList<>();
                     arrayList.add(filepath);
                     Log.d("사진가져오기", String.valueOf(uri));
+                    Log.d("eeeeeeeeeeeeeeeee",filepath);
                     //Log.d("getPath:",filepath+"filename"+filename);
                     madapter.notifyDataSetChanged();
                     break;
@@ -176,8 +178,6 @@ public class WriteDiaryActivity extends BaseActivity {
                     break;
             }
         }
-
-
     }
     private String getPath(Uri uri){
         String[] proj = { MediaStore.Images.Media.DATA };
@@ -187,6 +187,7 @@ public class WriteDiaryActivity extends BaseActivity {
         cursor.moveToFirst();
         String result = cursor.getString(column_index);
         cursor.close();
+        Log.d("getPath00000000000",result);
         return result;
     }
 
@@ -220,6 +221,7 @@ public class WriteDiaryActivity extends BaseActivity {
         RequestBody file=null;
         for(int i=0;i<arrayList.size();i++){
             file= RequestBody.create(MediaType.parse("image/jpg"),arrayList.get(i));
+            Log.d("file",String.valueOf(file));
             map.put(("file\"; filename=\"" + "photoname" + i + ".jpg"), file);
 
         }

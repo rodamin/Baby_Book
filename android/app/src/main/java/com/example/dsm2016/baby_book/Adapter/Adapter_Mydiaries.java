@@ -51,6 +51,7 @@ public class Adapter_Mydiaries extends RecyclerView.Adapter<Adapter_Mydiaries.Vi
     private Item_Mydairies item;
     public Adapter_Mydiaries(ArrayList<Item_Mydairies> items,Context context){
         this.mItems = items;
+        Log.d("items size", mItems.size() + "");
         this.context=context;
     }
 
@@ -61,16 +62,18 @@ public class Adapter_Mydiaries extends RecyclerView.Adapter<Adapter_Mydiaries.Vi
     DB_Code db_qna;
 
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public Adapter_Mydiaries.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_diaries,parent,false);
-        ViewHolder holder=new ViewHolder(v);
+        Adapter_Mydiaries.ViewHolder holder=new Adapter_Mydiaries.ViewHolder(v);
 
         return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+        Log.d("position", position + "");
         holder.imageView.setImageResource(mItems.get(position).getImage());
+        Log.d("imageVeiw ㄴㄴㄴㄴㄴㄴㄴ:",String.valueOf(mItems.get(position).getImage())+" "+mItems.get(position).getBaby_name());
        /* Glide.with(context).load(R.drawable.background_main)
                 .apply(RequestOptions.bitmapTransform(new RoundedCornersTransformation(45,0,
                         RoundedCornersTransformation.CornerType.BOTTOM))).into(holder.imageView);*/
@@ -88,9 +91,23 @@ public class Adapter_Mydiaries extends RecyclerView.Adapter<Adapter_Mydiaries.Vi
 
 
     @Override public int getItemCount() {
+        Log.d("mItems.size()ㄴㄴㄴㄴㄴㄴ:",String.valueOf(mItems.size()));
         return mItems.size();
     }
 
+
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        public ImageView imageView;
+        public CardView cardView;
+        public ViewHolder(View itemView) {
+            super(itemView);
+            imageView=(ImageView)itemView.findViewById(R.id.image_diaries);
+            cardView=(CardView)itemView.findViewById(R.id.diaries_cover);
+        }
+
+
+    }
     public void deleteItem(int index){
         mItems.remove(index);
         notifyItemRemoved(index);
@@ -129,22 +146,10 @@ public class Adapter_Mydiaries extends RecyclerView.Adapter<Adapter_Mydiaries.Vi
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
+            public void onFailure(Call<Void> call, Throwable t)  {
                 Log.d("연결","실패"+t.getMessage());
             }
         });
-
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public ImageView imageView;
-        public CardView cardView;
-        public ViewHolder(View itemView) {
-            super(itemView);
-            imageView=(ImageView)itemView.findViewById(R.id.image_diaries);
-            cardView=(CardView)itemView.findViewById(R.id.diaries_cover);
-        }
-
 
     }
 }

@@ -10,6 +10,22 @@ public class Item_Mydairies {
     private String baby_name;
     private String date;
 
+    public String getBaby_name() {
+        return baby_name;
+    }
+
+    public void setBaby_name(String baby_name) {
+        this.baby_name = baby_name;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     public int getPostion() {
         return postion;
     }
@@ -24,8 +40,8 @@ public class Item_Mydairies {
     public void setImage(int image) {
         this.image = image;
     }
-    public Item_Mydairies(int image){
+    /*public Item_Mydairies(int image ,String baby_name){
         this.image=image;
-
-    }
+        this.baby_name=baby_name;
+    }*/
 }

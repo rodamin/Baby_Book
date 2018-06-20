@@ -82,7 +82,7 @@ public class MyDiaryActivity extends BaseActivity {
 
         Intent intent = getIntent();
 //        int image = intent.getIntExtra("image",0);
-        String baby_name = intent.getStringExtra("baby_name");
+        final String baby_name = intent.getStringExtra("baby_name");
         Log.d("baby_name intent", baby_name);
 //        Log.d("dfdfdf",Integer.toString(image));
 
@@ -139,6 +139,7 @@ public class MyDiaryActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), WriteDiaryActivity.class);
+                intent.putExtra("baby_name",baby_name);
                 startActivity(intent);
                 ani_menu_off();
             }
