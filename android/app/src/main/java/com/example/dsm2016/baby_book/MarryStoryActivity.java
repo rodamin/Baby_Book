@@ -47,32 +47,32 @@ public class MarryStoryActivity extends BaseActivity {
         int code = db_qna.getCode();
         Log.d("xxx", code+"");
 
-        String baby_name = "ParkHaeBin";
-
-
-        retrofit=new Retrofit.Builder().baseUrl(APIinterface.URL).build();
-        apIinterface=retrofit.create(APIinterface.class);
-        Call<Void> call=apIinterface.story_write(baby_name, idx, story, code);
-        call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                int status=response.code();
-                if(status==201){
-                    Log.d("couple story 전달","성공");
-                    Intent intent=new Intent(getApplicationContext(), AddStoryActivity.class);
-                    startActivity(intent);
-                    finish();
-                    Toast.makeText(getApplicationContext(),"커플 스토리가 저장되었습니다.",Toast.LENGTH_LONG).show();
-                }
-                else if(status==404){
-                    Toast.makeText(getApplicationContext(),"커플 스토리 저장에 실패하였습니다.",Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                Log.d("연결","실패"+t.getMessage());
-            }
-        });
+//        String baby_name = "ParkHaeBin";
+//
+//
+//        retrofit=new Retrofit.Builder().baseUrl(APIinterface.URL).build();
+//        apIinterface=retrofit.create(APIinterface.class);
+//        Call<Void> call=apIinterface.story_write(baby_name, idx, story, code);
+//        call.enqueue(new Callback<Void>() {
+//            @Override
+//            public void onResponse(Call<Void> call, Response<Void> response) {
+//                int status=response.code();
+//                if(status==201){
+//                    Log.d("couple story 전달","성공");
+//                    Intent intent=new Intent(getApplicationContext(), AddStoryActivity.class);
+//                    startActivity(intent);
+//                    finish();
+//                    Toast.makeText(getApplicationContext(),"커플 스토리가 저장되었습니다.",Toast.LENGTH_LONG).show();
+//                }
+//                else if(status==404){
+//                    Toast.makeText(getApplicationContext(),"커플 스토리 저장에 실패하였습니다.",Toast.LENGTH_LONG).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Void> call, Throwable t) {
+//                Log.d("연결","실패"+t.getMessage());
+//            }
+//        });
     }
 }

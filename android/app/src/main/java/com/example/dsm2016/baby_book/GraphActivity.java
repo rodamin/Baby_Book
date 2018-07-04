@@ -36,6 +36,7 @@ public class GraphActivity extends BaseActivity {
     private Retrofit retrofit;
     private APIinterface apIinterface;
 
+    String baby_name;
     Realm mRealm;
     DB_Code db_qna;
 
@@ -43,6 +44,10 @@ public class GraphActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph);
+
+        Intent get_name_intent = getIntent();
+        baby_name = get_name_intent.getStringExtra("baby_name");
+        Log.d("GraphActivity_Babyname", baby_name);
 
         // chart_height
         // x축 라벨 추가
@@ -137,47 +142,40 @@ public class GraphActivity extends BaseActivity {
         chart_weight.animateY(2000, Easing.EasingOption.EaseInCubic);
         chart_weight.invalidate();
 
-//        mRealm = Realm.getDefaultInstance();
-//        RealmResults<DB_Code> results = mRealm.where(DB_Code.class).findAll();
-//
-//        for(int i = 0; i < results.size(); i++){
-//            db_qna = results.get(i);
-//            Log.d("db_qna", "protocol : " + db_qna);
-//        }
-//
-//        int code = db_qna.getCode();
-//        Log.d("getCode", code+"");
-//
-//        String baby_name = "ParkHaeBin";
-//
-//        retrofit=new Retrofit.Builder().baseUrl(APIinterface.URL).addConverterFactory(GsonConverterFactory.create()).build();
-//        apIinterface = retrofit.create(APIinterface.class);
-//
-//        Call<JsonArray> call=apIinterface.growth_graph(baby_name, code);
-//        call.enqueue(new Callback<JsonArray>() {
-//            @Override
-//            public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
-//                int status=response.code();
-//                if(status==201){
-//                    Log.d("graph 전달","성공");
-//                    Log.d("Response: ", response.body().toString());
-//                    Toast.makeText(getApplicationContext(),"성장정보 불러오기 성공",Toast.LENGTH_LONG).show();
-//
-//                    JsonArray jsonArray=response.body();
-//                    Log.d("array 결과", "onResponse: " + jsonArray.toString());
-//
-//
-//                }
-//                else if(status==404){
-//                    Toast.makeText(getApplicationContext(),"성장정보 불러오기 실패",Toast.LENGTH_LONG).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<JsonArray> call, Throwable t) {
-//                Log.d("연결","실패"+t.getMessage());
-//            }
-//        });
+        mRealm = Realm.getDefaultInstance();
+        RealmResults<DB_Code> results = mRealm.where(DB_Code.class).findAll();
+
+        for(int i = 0; i < results.size(); i++){
+            db_qna = results.get(i);
+            Log.d("db_qna", "protocol : " + db_qna);
+        }
+
+        int code = db_qna.getCode();
+        Log.d("getCode", code+"");
+
+        retrofit=new Retrofit.Builder().baseUrl(APIinterface.URL).addConverterFactory(GsonConverterFactory.create()).build();
+        apIinterface = retrofit.create(APIinterface.class);
+
+        Call<JsonArray> call=apIinterface.growth_graph(baby_name, code);
+        call.enqueue(new Callback<JsonArray>() {
+            @Override
+            public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
+                int status=response.code();
+                if(status==201){
+                    Log.d("graph 전달","성공");
+                    Log.d("Response: ", response.body().toString());
+                    Toast.makeText(getApplicationContext(),"성장정보 불러오기 성공",Toast.LENGTH_LONG).show();
+                }
+                else if(status==404){
+                    Toast.makeText(getApplicationContext(),"성장정보 불러오기 실패",Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonArray> call, Throwable t) {
+                Log.d("연결","실패"+t.getMessage());
+            }
+        });
 
     }
 }

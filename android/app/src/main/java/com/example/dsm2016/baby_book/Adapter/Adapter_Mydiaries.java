@@ -73,7 +73,7 @@ public class Adapter_Mydiaries extends RecyclerView.Adapter<Adapter_Mydiaries.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         Log.d("position", position + "");
         holder.imageView.setImageResource(mItems.get(position).getImage());
-        Log.d("imageVeiw ㄴㄴㄴㄴㄴㄴㄴ:",String.valueOf(mItems.get(position).getImage())+" "+mItems.get(position).getBaby_name());
+        Log.d("album_baby_name:",String.valueOf(mItems.get(position).getImage())+" "+mItems.get(position).getBaby_name());
        /* Glide.with(context).load(R.drawable.background_main)
                 .apply(RequestOptions.bitmapTransform(new RoundedCornersTransformation(45,0,
                         RoundedCornersTransformation.CornerType.BOTTOM))).into(holder.imageView);*/
@@ -91,7 +91,7 @@ public class Adapter_Mydiaries extends RecyclerView.Adapter<Adapter_Mydiaries.Vi
 
 
     @Override public int getItemCount() {
-        Log.d("mItems.size()ㄴㄴㄴㄴㄴㄴ:",String.valueOf(mItems.size()));
+        Log.d("mItems.size():",String.valueOf(mItems.size()));
         return mItems.size();
     }
 

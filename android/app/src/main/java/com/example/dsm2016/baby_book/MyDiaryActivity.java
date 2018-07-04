@@ -34,6 +34,7 @@ public class MyDiaryActivity extends BaseActivity {
     private ImageButton btn_menu, btn_story, btn_graph, btn_video, btn_babyinfo, btn_growth;
     private FloatingActionButton float_add_diary;
     boolean temp = false;
+    String baby_name;
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -74,26 +75,16 @@ public class MyDiaryActivity extends BaseActivity {
         mAdapter=new Adapter_ShowDiaries(item_showDiaries, getApplicationContext());
         mRecyclerView.setAdapter(mAdapter);
 
+//        item_showDiaries.add(new Item_ShowDiaries(R.drawable.background_main));
+//        item_showDiaries.add(new Item_ShowDiaries(R.drawable.test));
+//        item_showDiaries.add(new Item_ShowDiaries(R.drawable.test2));
+//        item_showDiaries.add(new Item_ShowDiaries(R.drawable.test3));
 
-        item_showDiaries.add(new Item_ShowDiaries(R.drawable.background_main));
-        item_showDiaries.add(new Item_ShowDiaries(R.drawable.test));
-        item_showDiaries.add(new Item_ShowDiaries(R.drawable.test2));
-        item_showDiaries.add(new Item_ShowDiaries(R.drawable.test3));
-
-        Intent intent = getIntent();
-//        int image = intent.getIntExtra("image",0);
-        final String baby_name = intent.getStringExtra("baby_name");
-        Log.d("baby_name intent", baby_name);
-//        Log.d("dfdfdf",Integer.toString(image));
-
+        Intent get_name_intent = getIntent();
+        baby_name = get_name_intent.getStringExtra("baby_name");
         text_title.setText(baby_name + " 앨범");
 
-//        String title=intent.getStringExtra("title");
-//        if(!title.isEmpty()){
-//            text_title.setText(title);
-//        }
         // 메뉴 클릭 시 인텐트
-
         btn_story.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,6 +98,7 @@ public class MyDiaryActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), GraphActivity.class);
+                intent.putExtra("baby_name", baby_name);
                 startActivity(intent);
             }
         });
@@ -131,6 +123,7 @@ public class MyDiaryActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), GrowthInfoActivity.class);
+                intent.putExtra("baby_name", baby_name);
                 startActivity(intent);
             }
         });

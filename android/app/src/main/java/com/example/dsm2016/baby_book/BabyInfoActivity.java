@@ -62,6 +62,13 @@ public class BabyInfoActivity extends BaseActivity implements View.OnClickListen
     }
 
     @Override
+    public void onBackPressed() {
+        Intent intent_diaries = new Intent(getApplicationContext(), DiariesActivity.class);
+        startActivity(intent_diaries);
+        super.onBackPressed();
+    }
+
+    @Override
     public void onClick(View view) {
         switch(view.getId()) {
             case R.id.btn_boy:

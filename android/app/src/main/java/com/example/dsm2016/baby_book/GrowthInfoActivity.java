@@ -27,6 +27,7 @@ public class GrowthInfoActivity extends AppCompatActivity {
 
     private Retrofit retrofit;
     private APIinterface apIinterface;
+    String baby_name;
     Realm mRealm;
     DB_Code db_qna;
 
@@ -42,14 +43,12 @@ public class GrowthInfoActivity extends AppCompatActivity {
         edit_weight = (EditText)findViewById(R.id.edit_weight);
         btn_save = (Button)findViewById(R.id.btn_save);
 
-
+        Intent get_name_intent = getIntent();
+        baby_name = get_name_intent.getStringExtra("baby_name");
 
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                String baby_name = "ParkHaeBin";
-
                 String date = getNowDate();
                 int height = Integer.parseInt(edit_height.getText().toString());
                 int weight = Integer.parseInt(edit_weight.getText().toString());

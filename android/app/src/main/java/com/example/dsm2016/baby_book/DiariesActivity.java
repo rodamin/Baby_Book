@@ -83,21 +83,21 @@ public class DiariesActivity extends BaseActivity  {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(),"버튼",Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(getApplicationContext(), BabyInfoActivity.class);
-                startActivity(intent);
+                Intent intent_babyinfo = new Intent(getApplicationContext(), BabyInfoActivity.class);
+                startActivity(intent_babyinfo);
 //                dialog.show();
             }
         });
+
         btn_calendar = (Button)findViewById(R.id.btn_calendar);
 
         btn_calendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), BabyInfoActivity.class);
-                startActivity(intent);
+                Intent intent_calendar = new Intent(getApplicationContext(), CalendarActivity.class);
+                startActivity(intent_calendar);
             }
         });
-
 
         recyclerView=(RecyclerView)findViewById(R.id.diaries_rv);
         recyclerView.setHasFixedSize(true);
@@ -109,9 +109,18 @@ public class DiariesActivity extends BaseActivity  {
         recyclerView.addOnItemTouchListener(new RecyclerViewClickListener(getApplicationContext(),recyclerView,new RecyclerViewClickListener.OnItemClickListener(){
 
             @Override
-            public void onItemClick(View view, int position) {
+            public void onItemClick(View view, final int position) {
                 preview=(ImageView)findViewById(R.id.preview);
                 preview.setImageResource(item_mydairies.get(position).getImage());
+                preview.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Log.d("album_click_baby_name", String.valueOf(item_mydairies.get(position).getBaby_name()));
+                        Intent intent_mydiaries = new Intent(getApplicationContext(), MyDiaryActivity.class);
+                        intent_mydiaries.putExtra("baby_name",String.valueOf(item_mydairies.get(position).getBaby_name()));
+                        startActivity(intent_mydiaries);
+                    }
+                });
             }
 
             @Override
@@ -164,14 +173,14 @@ public class DiariesActivity extends BaseActivity  {
                     Log.d("onResponse:", jsonArray.toString());
 
                     for(int i = 0; i < jsonArray.size(); i++) {
-                        Item_Mydairies item=new Item_Mydairies();
-                        Log.d("personal", jsonArray.get(i).getAsJsonObject().get("baby_name").getAsString());
-                         String baby=jsonArray.get(i).getAsJsonObject().get("baby_name").getAsString();
-                         item.setBaby_name(baby);
-                         item.setImage(R.drawable.background_main);
+                        Item_Mydairies item = new Item_Mydairies();
+//                        Log.d("personal", jsonArray.get(i).getAsJsonObject().get("baby_name").getAsString());
+                        String baby = jsonArray.get(i).getAsJsonObject().get("baby_name").getAsString();
+                        item.setBaby_name(baby);
+                        item.setImage(R.drawable.background_main);
                         item_mydairies.add(item);
-                   }
-                   madapter = new Adapter_Mydiaries(item_mydairies, getApplicationContext());
+                    }
+                    madapter = new Adapter_Mydiaries(item_mydairies, getApplicationContext());
                     recyclerView.setAdapter(madapter);
                     Toast.makeText(getApplicationContext(),"아기들 불러오기 성공",Toast.LENGTH_LONG).show();
                 }
@@ -185,12 +194,5 @@ public class DiariesActivity extends BaseActivity  {
                 Log.d("연결","실패"+t.getMessage());
             }
         });
-
-//        item_mydairies.add(new Item_Mydairies(R.drawable.background_main,"dwdd"));
-//        item_mydairies.add(new Item_Mydairies(R.drawable.test,"tgtgtg"));
-//        item_mydairies.add(new Item_Mydairies(R.drawable.test2,"gggf"));
-//        item_mydairies.add(new Item_Mydairies(R.drawable.test3,"ghghg"));
     }
-
-
 }
