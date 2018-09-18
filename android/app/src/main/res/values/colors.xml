@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#c590a6</color>
+    <color name="colorPrimaryLight">#caa0a0</color>
+    <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#FF4081</color>
 </resources>
+
+    <!--#c590a6 - colorPrimary-->
+    <!--#caa0a0 - colorPrimaryLight-->
+    <!--#cfc7c7에 투명도 20% - 입력칸-->
+    <!--#f7645c - 엄마 버튼-->
+    <!--#787cda - 아빠 버튼-->
+    <!--#002060 - 엄마 아빠 버튼 선택시 border-->
+    <!--#ffffff에 투명도 10% - MyAlbum 앨범이름 입력칸-->
+    <!--#5b9bd5 투명도 50% - 아기 성별 선택시-->
+    <!--#7f7f7f - + 있는 점선 색-->
+    <!--#fff2cc 투명도 20% - 일기 적는 칸-->
+    <!--#ffffff 투명도 60% 키랑 몸무게 적는칸-->
+    <!--#ffffff 투명도 50% 성장그래프 배경-->
+    <!--#c55a11 그래프 선 색-->
+    <!--#ffbe60 로딩 해 색-->
